@@ -1,11 +1,11 @@
 import { createRef, useEffect } from "react";
 import { Song } from "../../types";
-import { LyricsContainer } from "./components/LyricsContainer";
 import { StyledLyrics } from "./Lyrics.style";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../app/store";
 
-export const Lyrics:React.FC = () => {
-
-    const lyrics = `
+export const Lyrics: React.FC = () => {
+  const lyricsZ = `
     Back in black
 I hit the sack
 I've been too long, I'm glad to be back
@@ -65,45 +65,51 @@ Yes, I'm back in black
 I've hit the sack
     `;
 
-    
-    const song: Song = {
-        title: 'Back in black',
-        artist: 'AC/DC',
-        duration: 253,
-        time_elapsed: 235,
+  const lyrics = "";
+
+  const song: Song | undefined = useSelector(
+    (state: RootState) => state.dashboard.song
+  );
+
+  const containerRef = createRef<HTMLDivElement>();
+  const lyricsRef = createRef<HTMLDivElement>();
+
+  // scrolling
+  useEffect(() => {
+    if (lyricsRef.current && containerRef.current && song) {
+      const lineHeight = window
+        .getComputedStyle(lyricsRef.current, null)
+        .getPropertyValue("line-height");
+
+      const lineHeightNum = Number(lineHeight.replace("px", ""));
+
+      const height = containerRef.current.clientHeight;
+      const total_lyrics_lines = lyrics.split(/\r\n|\r|\n/).length;
+
+      // Calculate how much time each line takes to sing
+      const seconds_per_line = song.duration / total_lyrics_lines;
+      const lines_in_container = height / lineHeightNum;
+      // After how many seconds should we start scrolling
+      const min_scroll_after_s = seconds_per_line * (lines_in_container / 2);
+      // How many lines should we scroll
+      const lines_to_scroll =
+        Math.max(song.time_elapsed - min_scroll_after_s, 0) / seconds_per_line;
+
+      const scroll = lines_to_scroll * lineHeightNum;
+
+      // Make sure we don't scroll more than necessary
+      let negative_margin = Math.min(
+        scroll,
+        lyricsRef.current.clientHeight - height
+      );
+      negative_margin = negative_margin * -1;
+      lyricsRef.current.style.marginTop = negative_margin + "px";
     }
+  }, [lyricsRef.current, containerRef.current, lyrics, song]);
 
-    const containerRef = createRef<HTMLDivElement>();
-    const lyricsRef = createRef<HTMLDivElement>();
-
-    useEffect(() => {
-        if (lyricsRef.current && containerRef.current){
-            
-        const lineHeight = window
-          .getComputedStyle(lyricsRef.current, null)
-          .getPropertyValue("line-height");
-
-        const lineHeightNum = Number(lineHeight.replace('px',''));
-
-        const height = containerRef.current.clientHeight;  
-        const total_lyrics_lines = lyrics.split(/\r\n|\r|\n/).length;
-
-        // Calculate how much time each line takes to sing
-        const seconds_per_line = song.duration/total_lyrics_lines;
-        const lines_in_container = height/lineHeightNum;
-        // After how many seconds should we start scrolling
-        const min_scroll_after_s = seconds_per_line * (lines_in_container/2);
-        // How many lines should we scroll
-        const lines_to_scroll = Math.max((song.time_elapsed - min_scroll_after_s),0) / seconds_per_line;
-        
-        const scroll = lines_to_scroll * lineHeightNum;
-
-        // Make sure we don't scroll more than necessary
-        let negative_margin = Math.min(scroll,lyricsRef.current.clientHeight - height);
-        negative_margin = negative_margin * -1;
-        lyricsRef.current.style.marginTop = negative_margin+'px';
-        }
-      }, [lyricsRef.current,containerRef.current, lyrics, song]);
-
-    return (<StyledLyrics ref={containerRef}><div ref={lyricsRef}>{lyrics}</div></StyledLyrics>)
-}
+  return (
+    <StyledLyrics ref={containerRef}>
+      <div ref={lyricsRef}>{lyrics}</div>
+    </StyledLyrics>
+  );
+};

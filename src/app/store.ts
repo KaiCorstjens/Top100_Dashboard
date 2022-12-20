@@ -1,17 +1,20 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import { configureStore } from "@reduxjs/toolkit";
+import DashboardSlice from "../features/Dashboard/api/DashboardSlice";
+import { spotifyApi } from "../features/Dashboard/api/SpotifyApiSlice";
+import { top100Api } from "../features/Dashboard/api/Top100ApiSlice";
 
-export const store = configureStore({
+const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    dashboard: DashboardSlice,
+    [spotifyApi.reducerPath]: spotifyApi.reducer,
+    [top100Api.reducerPath]: top100Api.reducer,
   },
+  middleware: (getdefaultMiddleware) =>
+    getdefaultMiddleware().concat(
+      ...[spotifyApi.middleware, top100Api.middleware]
+    ),
 });
 
+export default store;
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
-export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  RootState,
-  unknown,
-  Action<string>
->;
