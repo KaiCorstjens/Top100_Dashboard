@@ -11,15 +11,22 @@ export const SongInfo: React.FC = () => {
   const song: Song | undefined = useSelector(
     (state: RootState) => state.dashboard.song
   );
+  const showSlido: boolean = useSelector(
+    (state: RootState) => state.dashboard.showSlido
+  );
 
   return (
-    <SongInfoContainer>
+    <SongInfoContainer
+      style={{
+        display: showSlido ? "inherit" : "table",
+        marginLeft: showSlido ? "10%" : "auto",
+      }}
+    >
       <AlbumArtContainer>
         <SongTitle song={song} position={99} />
         <AlbumArt album_art_url={song?.album_art_url} />
         <TimeBar song={song} />
       </AlbumArtContainer>
-
       <SongStats />
     </SongInfoContainer>
   );

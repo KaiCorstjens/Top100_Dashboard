@@ -14,3 +14,7 @@ export const SongStatsContainer = styled.div`
   color: white;
   float: left;
 `;
+
+export const SongVotersContainer = styled.div`
+  font-size: 24px;
+`;

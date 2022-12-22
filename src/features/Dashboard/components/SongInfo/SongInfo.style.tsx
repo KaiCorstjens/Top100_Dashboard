@@ -10,7 +10,6 @@ export const AlbumArtContainer = styled.div`
 
 export const SongInfoContainer = styled.div`
   margin-top: 5%;
-  display: table;
   margin-left: auto;
   margin-right: auto;
 `;

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledLyrics = styled.div`
+export const StyledSlidoContainer = styled.div`
   position: absolute;
   width: 20%;
   right: 10%;
@@ -14,4 +14,20 @@ export const StyledLyrics = styled.div`
   white-space: pre-line;
   height: 80vh;
   overflow: hidden;
+`;
+
+export const SlidoQRContainer = styled.div`
+  position: absolute;
+  right: 20px;
+  bottom: 0px;
+`;
+
+export const SlidoQRImage = styled.img`
+  width: 200px;
+`;
+
+export const SlidoQRArrowImage = styled.img`
+  position: absolute;
+  right: 50px;
+  bottom: 175px;
 `;

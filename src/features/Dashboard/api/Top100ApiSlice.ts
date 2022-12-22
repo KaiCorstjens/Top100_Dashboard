@@ -3,14 +3,16 @@ import { SongStats } from "../types";
 
 export const top100Api = createApi({
   reducerPath: "top100Api",
-  baseQuery: fetchBaseQuery({ baseUrl: "https://top100.stichtingpopell.nl" }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: "https://top100.stichtingpopell.nl/api",
+  }),
   endpoints: (builder) => ({
     getSongStats: builder.query<
       SongStats,
       { spotify_uri: string; year: number }
     >({
       query: (params) => ({
-        url: "/song_stats",
+        url: "/stats",
         params: params,
       }),
     }),

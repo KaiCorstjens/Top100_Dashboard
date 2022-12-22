@@ -55,7 +55,13 @@ export type SpotifyAlbumImage = {
 };
 
 export type SongStats = {
+  track: string;
+  points: number;
   position: number;
-  value: number;
-  voters: string[];
+  number_of_votes: number;
+  voters: SongVoter[];
+};
+
+export type SongVoter = {
+  submitter_name: string;
 };

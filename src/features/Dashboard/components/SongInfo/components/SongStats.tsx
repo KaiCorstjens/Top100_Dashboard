@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../../app/store";
-import { SongStatsContainer } from "./SongStats.style";
+import { SongStatsContainer, SongVotersContainer } from "./SongStats.style";
 import { SongStats as Stats } from "../../../types";
 
 export const SongStats: React.FC = () => {
@@ -8,13 +8,20 @@ export const SongStats: React.FC = () => {
     (state: RootState) => state.dashboard.stats
   );
 
-  return (
-    <SongStatsContainer
-      style={{ display: stats?.position ? "table-cell" : "none" }}
-    >
-      Punten: {stats?.value} <br />
-      <br />
-      Stemmen: {stats?.voters.join(", ")}
-    </SongStatsContainer>
-  );
+  if (stats) {
+    return (
+      <SongStatsContainer style={{ display: stats ? "table-cell" : "none" }}>
+        Punten: {stats?.points} <br />
+        <br />
+        Stemmen:{" "}
+        <SongVotersContainer>
+          {stats.voters.map((vote) => vote.submitter_name).join(", \n")}
+        </SongVotersContainer>
+      </SongStatsContainer>
+    );
+  } else {
+    return <></>;
+  }
 };
+
+//Array.from( myMap ).map(([key, value]) => ({ key, value }));
