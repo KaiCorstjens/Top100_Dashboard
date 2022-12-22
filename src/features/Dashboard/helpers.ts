@@ -1,3 +1,4 @@
+import { SPOTIFY_CALLBACK_URL, SPOTIFY_CLIENT_ID } from "../../app/constants";
 import { Song, SpotifyAlbumImage, SpotifyPlayingResponse } from "./types";
 
 export const SpotifyDataToSong = (
@@ -41,9 +42,9 @@ export const getAccessTokenFromUrl = (url: string) => {
 };
 
 export const callSpotifyAuthorize = () => {
-  const client_id = "ba35578ed09c4c3f92a833d03ecbe575";
+  const client_id = SPOTIFY_CLIENT_ID;
   const response_type = "token";
-  const redirect_uri = "http://localhost:3000/spotify_redirect?";
+  const redirect_uri = SPOTIFY_CALLBACK_URL;
   const state = "";
   const scope = "user-read-currently-playing";
 

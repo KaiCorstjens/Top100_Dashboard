@@ -15,7 +15,7 @@ const initialState = {
   token: undefined,
   stats: undefined,
   showSlido: false,
-  pollingInterval: 500,
+  pollingInterval: 200,
 } as DashboardState;
 
 const dashboardSlice = createSlice({

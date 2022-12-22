@@ -12,7 +12,7 @@ export const PollIntervalControl = () => {
   const handleButtonOnClick = () => {
     const prompt_input = prompt(
       "Please enter new polling interval in ms:",
-      "500"
+      pollingInterval.toString()
     );
 
     const new_interval = Number(prompt_input);
