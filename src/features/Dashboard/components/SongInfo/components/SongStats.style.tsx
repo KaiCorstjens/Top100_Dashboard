@@ -15,6 +15,8 @@ export const SongStatsContainer = styled.div`
   border-radius: 0 25px 25px 0;
   color: white;
   float: left;
+  max-height: 500px;
+  overflow: hidden;
 `;
 
 export const SongVotersContainer = styled.div`
