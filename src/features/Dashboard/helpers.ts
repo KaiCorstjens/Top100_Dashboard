@@ -44,7 +44,7 @@ export const getAccessTokenFromUrl = (url: string) => {
 export const callSpotifyAuthorize = () => {
   const client_id = SPOTIFY_CLIENT_ID;
   const response_type = "token";
-  const redirect_uri = SPOTIFY_CALLBACK_URL;
+  const redirect_uri = window.location.origin + "/spotify_redirect?";
   const state = "";
   const scope = "user-read-currently-playing";
 

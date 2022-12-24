@@ -53,7 +53,8 @@ export const Dashboard: React.FC = () => {
       if (isDifferentSong(newSong, song)) {
         // call stats
         getSongStats({
-          spotify_uri: newSong.spotify_uri,
+          title: newSong.title,
+          artist: newSong.artist,
           year: new Date().getFullYear(),
         });
       }
