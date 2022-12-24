@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/KaiCorstjens/Top100_Dashboard/static/css/main.e6c13ad2.css",
+    "main.js": "/KaiCorstjens/Top100_Dashboard/static/js/main.0a435367.js",
+    "static/js/787.3aced9d8.chunk.js": "/KaiCorstjens/Top100_Dashboard/static/js/787.3aced9d8.chunk.js",
+    "index.html": "/KaiCorstjens/Top100_Dashboard/index.html",
+    "main.e6c13ad2.css.map": "/KaiCorstjens/Top100_Dashboard/static/css/main.e6c13ad2.css.map",
+    "main.0a435367.js.map": "/KaiCorstjens/Top100_Dashboard/static/js/main.0a435367.js.map",
+    "787.3aced9d8.chunk.js.map": "/KaiCorstjens/Top100_Dashboard/static/js/787.3aced9d8.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.0a435367.js"
+  ]
+}
