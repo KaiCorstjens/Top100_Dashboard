@@ -1,3 +1,4 @@
+import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ThemeProvider } from "styled-components";
@@ -57,9 +58,18 @@ export const Dashboard: React.FC = () => {
 
   useEffect(() => {
     if (spotifyApiError) {
-      console.warn("spotify error", spotifyApiError);
+      if (
+        access_token &&
+        data != undefined &&
+        (spotifyApiError as FetchBaseQueryError).status === 401
+      ) {
+        callSpotifyAuthorize();
+      } else {
+        console.warn("spotify error", spotifyApiError);
+        // Code 401 -> Access token expired!
+      }
     }
-  }, [spotifyApiError]);
+  }, [spotifyApiError, data, access_token]);
 
   useEffect(() => {
     if (data) {
