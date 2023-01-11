@@ -46,8 +46,13 @@ export const getAccessTokenFromUrl = (url: string) => {
 export const callSpotifyAuthorize = () => {
   const client_id = SPOTIFY_CLIENT_ID;
   const response_type = "token";
-  const redirect_uri = window.location.origin + "/spotify_redirect?";
-  const state = "";
+  const state = "redirected-from-spotify";
+  let site_url = window.location.href;
+  site_url =
+    site_url.charAt(site_url.length - 1) === "/"
+      ? site_url.substring(0, site_url.length - 1)
+      : site_url;
+  const redirect_uri = site_url + "/spotify_redirect?";
   const scope = "user-read-currently-playing";
 
   let url = "https://accounts.spotify.com/authorize";
