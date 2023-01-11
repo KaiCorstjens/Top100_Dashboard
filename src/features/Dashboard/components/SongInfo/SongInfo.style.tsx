@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 export const AlbumArtContainer = styled.div`
-  border-radius: 25px;
-  border: 2px solid #ffed2d;
-  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: ${(props) => props.theme.borderRadius};
+  border: 2px solid ${(props) => props.theme.borderColor};
+  background-color: rgba(0, 0, 0, 0.75);
   width: 33vw;
   float: left;
 `;

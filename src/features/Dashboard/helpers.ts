@@ -1,20 +1,22 @@
-import { SPOTIFY_CALLBACK_URL, SPOTIFY_CLIENT_ID } from "../../app/constants";
+import { SPOTIFY_CLIENT_ID } from "../../app/constants";
 import { Song, SpotifyAlbumImage, SpotifyPlayingResponse } from "./types";
 
 export const SpotifyDataToSong = (
   spotifySong: SpotifyPlayingResponse
 ): Song => {
-  const getHighestResAlbumArt = (albumImages: SpotifyAlbumImage[]): string => {
+  const getHighestResAlbumArt = (
+    albumImages: SpotifyAlbumImage[]
+  ): string | undefined => {
     const highestResolution = Math.max(...albumImages.map((img) => img.height));
     const highestResolutionImage = albumImages.find(
       (img) => img.height === highestResolution
     );
-    return highestResolutionImage?.url ?? "";
+    return highestResolutionImage?.url ?? undefined;
   };
 
   const receivedSong: Song = {
     title: spotifySong?.item?.name,
-    artist: spotifySong?.item?.album.artists?.map((a) => a.name)?.join(", "),
+    artist: spotifySong?.item?.artists.map((a) => a.name)?.join(", "),
     duration: spotifySong?.item?.duration_ms,
     time_elapsed: spotifySong?.progress_ms,
     spotify_uri: spotifySong?.item?.uri,

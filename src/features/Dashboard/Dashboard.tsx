@@ -1,12 +1,17 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { ThemeProvider } from "styled-components";
 import { RootState } from "../../app/store";
+import { defaultTheme } from "../../app/theme/default-theme-tokens";
+import { moerebuukTheme } from "../../app/theme/moerebuuk-theme-tokens";
+import { top100Theme } from "../../app/theme/top100-theme-tokens";
 import { setSong, setSongStats, setToken } from "./api/DashboardSlice";
 import { spotifyApi } from "./api/SpotifyApiSlice";
 import { useLazyGetSongStatsQuery } from "./api/Top100ApiSlice";
 import { Controls } from "./components/Controls/Controls";
 import { Slido } from "./components/Slido/Slido";
 import { SongInfo } from "./components/SongInfo/SongInfo";
+import { Sponsors } from "./components/Sponsors/Sponsors";
 // import { Lyrics } from "./components/Lyrics/Lyrics";
 import { FullScreenDashboard } from "./Dashboard.style";
 import {
@@ -20,7 +25,7 @@ import { Song } from "./types";
 export const Dashboard: React.FC = () => {
   const dispatch = useDispatch();
 
-  const { pollingInterval, showSlido, song } = useSelector(
+  const { pollingInterval, showSlido, showSponsors, song } = useSelector(
     (state: RootState) => state.dashboard
   );
 
@@ -55,7 +60,7 @@ export const Dashboard: React.FC = () => {
         getSongStats({
           title: newSong.title,
           artist: newSong.artist,
-          year: new Date().getFullYear(),
+          year: 2022,
         });
       }
       dispatch(setSong(newSong));
@@ -73,10 +78,13 @@ export const Dashboard: React.FC = () => {
   }, [songStatsData, isFetchingSongStats, songStatsError]);
 
   return (
-    <FullScreenDashboard>
-      <Controls />
-      <SongInfo />
-      <Slido visible={showSlido} />
-    </FullScreenDashboard>
+    <ThemeProvider theme={moerebuukTheme}>
+      <FullScreenDashboard>
+        <Controls />
+        <SongInfo />
+        <Slido visible={showSlido} />
+        <Sponsors visible={showSponsors} />
+      </FullScreenDashboard>
+    </ThemeProvider>
   );
 };

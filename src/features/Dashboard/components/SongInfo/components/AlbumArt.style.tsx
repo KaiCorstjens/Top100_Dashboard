@@ -3,8 +3,7 @@ import styled from "styled-components";
 export const StyledAlbumArt = styled.div`
   aspect-ratio: 1 / 1;
   width: 100%;
-  background-image: url("${process.env.PUBLIC_URL +
-  "/images/unknown_album.png"}");
+  background-image: ${(props) => props.theme.unknownAlbum};
   background-size: contain;
   background-repeat: no-repeat;
 `;

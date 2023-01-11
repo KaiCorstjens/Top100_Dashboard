@@ -7,6 +7,7 @@ interface DashboardState {
   token: string | undefined;
   stats: SongStats | undefined;
   showSlido: boolean;
+  showSponsors: boolean;
   pollingInterval: number;
 }
 
@@ -15,6 +16,7 @@ const initialState = {
   token: undefined,
   stats: undefined,
   showSlido: false,
+  showSponsors: true,
   pollingInterval: 200,
 } as DashboardState;
 
@@ -34,6 +36,9 @@ const dashboardSlice = createSlice({
     setShowSlido(state, action: PayloadAction<boolean>) {
       state.showSlido = action.payload;
     },
+    setShowSponsors(state, action: PayloadAction<boolean>) {
+      state.showSponsors = action.payload;
+    },
     setPollingInterval(state, action: PayloadAction<number>) {
       state.pollingInterval = action.payload;
     },
@@ -45,6 +50,7 @@ export const {
   setToken,
   setSongStats,
   setShowSlido,
+  setShowSponsors,
   setPollingInterval,
 } = dashboardSlice.actions;
 export default dashboardSlice.reducer;

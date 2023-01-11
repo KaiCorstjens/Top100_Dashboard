@@ -22,6 +22,6 @@ export const TimeBarProgressionContainer = styled.div`
 `;
 
 export const TimeBarProgression = styled.div`
-  background-color: #ffed2d;
+  background-color: ${(props) => props.theme.timeBarColor};
   height: 50px;
 `;

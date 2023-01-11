@@ -4,7 +4,7 @@ export type Song = {
   duration: number;
   time_elapsed: number;
   spotify_uri: string;
-  album_art_url: string;
+  album_art_url: string | undefined;
 };
 
 export type SpotifyAuthorizeResponse = {
@@ -33,13 +33,13 @@ export type SpotifyPlayingResponse = {
 export type SpotifyItem = {
   album: SpotifyAlbum;
   name: string;
+  artists: SpotifyArtist[];
   is_playing: boolean;
   duration_ms: number;
   uri: string;
 };
 
 export type SpotifyAlbum = {
-  artists: SpotifyArtist[];
   images: SpotifyAlbumImage[];
   name: string;
 };

@@ -4,6 +4,7 @@ import { Song, SongStats } from "../../../types";
 import {
   SongContainer,
   SongNumber,
+  SongNumberContainer,
   SongTitleContainer,
 } from "./SongTitle.style";
 
@@ -19,9 +20,11 @@ export const SongTitle: React.FC<SongTitleProps> = (props) => {
 
   return (
     <SongContainer>
-      <SongNumber style={{ display: stats?.position ? "table-cell" : "none" }}>
-        {"#" + stats?.position}
-      </SongNumber>
+      <SongNumberContainer
+        style={{ display: stats?.position ? "inherit" : "none" }}
+      >
+        <SongNumber>{"#" + stats?.position}</SongNumber>
+      </SongNumberContainer>
       <SongTitleContainer>
         {props.song?.title}
         <br />

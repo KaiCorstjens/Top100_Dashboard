@@ -1,9 +1,7 @@
 import styled from "styled-components";
 
 export const SongContainer = styled.div`
-  display: table;
-  font-size: 34px;
-  table-layout: fixed;
+  font-size: ${(props) => props.theme.titleFontSize};
   width: 100%;
 `;
 
@@ -11,18 +9,22 @@ export const SongNumber = styled.div`
   width: 75px;
   height: 75px;
   margin-right: 5%;
-  display: table-cell;
   vertical-align: middle;
-  color: white;
-  background-color: grey;
-  border-radius: 25px 0px;
+  display: table-cell;
+  color: ${(props) => props.theme.textColor};
+  background-color: ${(props) => props.theme.positionBgColor};
+  border-radius: ${(props) => props.theme.positionBorderRadius} 0px;
   text-align: center;
 `;
 
+export const SongNumberContainer = styled.div`
+  width: 75px;
+  float: left;
+`;
+
 export const SongTitleContainer = styled.div`
-  display: table-cell;
   vertical-align: middle;
   text-align: center;
-  color: #fff;
+  color: ${(props) => props.theme.textColor};
   width: 100%;
 `;

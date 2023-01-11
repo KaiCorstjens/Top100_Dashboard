@@ -6,19 +6,20 @@ export const SongStatsContainer = styled.div`
   margin-top: 15%;
   display: table-cell;
   vertical-align: middle;
-  font-size: 34px;
-  background-color: rgba(0, 0, 0, 0.5);
+  font-size: ${(props) => props.theme.statsFontSize};
+  background-color: rgba(0, 0, 0, 0.75);
   padding-right: 25px;
   padding-left: 25px;
   padding-top: 10px;
   padding-bottom: 20px;
-  border-radius: 0 25px 25px 0;
-  color: white;
+  border-radius: 0 ${(props) => props.theme.borderRadius}
+    ${(props) => props.theme.borderRadius} 0;
+  color: ${(props) => props.theme.textColor};
   float: left;
   max-height: 500px;
   overflow: hidden;
 `;
 
 export const SongVotersContainer = styled.div`
-  font-size: 24px;
+  font-size: ${(props) => props.theme.votersFontSize};
 `;
