@@ -40,9 +40,12 @@ export const Dashboard: React.FC = () => {
     },
   ] = useLazyGetSongStatsQuery();
 
-  const { data } = spotifyApi.useGetNowPlayingQuery(undefined, {
-    pollingInterval: pollingInterval,
-  });
+  const { data, error: spotifyApiError } = spotifyApi.useGetNowPlayingQuery(
+    undefined,
+    {
+      pollingInterval: pollingInterval,
+    }
+  );
 
   useEffect(() => {
     if (access_token) {
@@ -51,6 +54,12 @@ export const Dashboard: React.FC = () => {
       callSpotifyAuthorize();
     }
   }, [access_token, dispatch, pollingInterval]);
+
+  useEffect(() => {
+    if (spotifyApiError) {
+      console.warn("spotify error", spotifyApiError);
+    }
+  }, [spotifyApiError]);
 
   useEffect(() => {
     if (data) {
