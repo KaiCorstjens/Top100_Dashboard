@@ -51,8 +51,10 @@ export const callSpotifyAuthorize = () => {
     site_url.charAt(site_url.length - 1) === "/"
       ? site_url.substring(0, site_url.length - 1)
       : site_url;
+  site_url = site_url.indexOf("github.io")
+    ? "https://kaicorstjens.github.io/Top100_Dashboard"
+    : site_url;
   const scope = "user-read-currently-playing";
-  alert(site_url);
   const redirect_uri = site_url + "/spotify_redirect?";
   const state = "redirected-from-spotify";
 
@@ -62,7 +64,6 @@ export const callSpotifyAuthorize = () => {
   url += "&scope=" + encodeURIComponent(scope);
   url += "&redirect_uri=" + encodeURIComponent(redirect_uri);
   url += "&state=" + encodeURIComponent(state);
-  alert(url);
   window.location.href = url;
 };
 
