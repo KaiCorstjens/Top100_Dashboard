@@ -1,7 +1,7 @@
 import { ThemeSchema } from "./theme-schema";
 
 export const top100Theme: ThemeSchema = {
-  background: "url('/images/backgrounds/bg_image.jpg')",
+  background: "url('/images/backgrounds/popell_background.jpg')",
   unknownAlbum: "/images/unknown_album/unknown_album_top100.png",
   textColor: "#FFF",
   titleFontSize: "28px",

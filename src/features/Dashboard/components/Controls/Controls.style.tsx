@@ -2,11 +2,8 @@ import styled from "styled-components";
 
 export const ControlsContainer = styled.div`
   width: 50px;
-  opacity: 0;
+  display: none;
   position: absolute;
-  &:hover {
-    opacity: 1;
-  }
   overflow: hidden;
 `;
 
@@ -26,4 +23,13 @@ export const SponsorsControlButton = styled.div`
   width: 50px;
   height: 50px;
   background-color: #888;
+`;
+
+export const ControlsIconContainer = styled.div`
+  opacity: 0;
+  position: absolute;
+  cursor: pointer;
+  &:hover {
+    opacity: 1;
+  }
 `;

@@ -1,5 +1,5 @@
 import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import { RootState } from "../../app/store";
@@ -25,10 +25,11 @@ import { Song } from "./types";
 
 export const Dashboard: React.FC = () => {
   const dispatch = useDispatch();
+  const [consecutiveSpotifyErrors, setConsecutiveSpotifyErrors] =
+    useState<number>(0);
 
-  const { pollingInterval, showSlido, showSponsors, song } = useSelector(
-    (state: RootState) => state.dashboard
-  );
+  const { profile, pollingInterval, showSlido, showSponsors, song } =
+    useSelector((state: RootState) => state.dashboard);
 
   const access_token = getAccessTokenFromUrl(window.location.href);
 
@@ -59,13 +60,20 @@ export const Dashboard: React.FC = () => {
   useEffect(() => {
     if (spotifyApiError) {
       if (
-        access_token &&
-        data != undefined &&
-        (spotifyApiError as FetchBaseQueryError).status === 401
+        (access_token &&
+          data !== undefined &&
+          (spotifyApiError as FetchBaseQueryError).status === 401) ||
+        consecutiveSpotifyErrors > 10
       ) {
         callSpotifyAuthorize();
+        setConsecutiveSpotifyErrors(0);
       } else {
         console.warn("spotify error", spotifyApiError);
+        console.log(
+          access_token,
+          (spotifyApiError as FetchBaseQueryError).status === 401
+        );
+        setConsecutiveSpotifyErrors(consecutiveSpotifyErrors + 1);
       }
     }
   }, [spotifyApiError, data, access_token]);
@@ -95,7 +103,7 @@ export const Dashboard: React.FC = () => {
   }, [songStatsData, isFetchingSongStats, songStatsError]);
 
   return (
-    <ThemeProvider theme={moerebuukTheme}>
+    <ThemeProvider theme={profile.theme}>
       <FullScreenDashboard>
         <Controls />
         <SongInfo />
