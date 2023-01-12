@@ -46,15 +46,9 @@ export const getAccessTokenFromUrl = (url: string) => {
 export const callSpotifyAuthorize = () => {
   const client_id = SPOTIFY_CLIENT_ID;
   const response_type = "token";
-  let site_url = window.location.origin;
-  site_url =
-    site_url.charAt(site_url.length - 1) === "/"
-      ? site_url.substring(0, site_url.length - 1)
-      : site_url;
-  site_url =
-    site_url.indexOf("github.io") > 0
-      ? "https://kaicorstjens.github.io/Top100_Dashboard"
-      : site_url;
+  let site_url = window.location.href;
+  site_url = site_url.substring(0, site_url.lastIndexOf("/"));
+
   const scope = "user-read-currently-playing";
   const redirect_uri = site_url + "/spotify_redirect?";
   const state = "redirected-from-spotify";

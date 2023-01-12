@@ -66,7 +66,6 @@ export const Dashboard: React.FC = () => {
         callSpotifyAuthorize();
       } else {
         console.warn("spotify error", spotifyApiError);
-        // Code 401 -> Access token expired!
       }
     }
   }, [spotifyApiError, data, access_token]);
@@ -75,7 +74,6 @@ export const Dashboard: React.FC = () => {
     if (data) {
       const newSong: Song = SpotifyDataToSong(data);
       if (isDifferentSong(newSong, song)) {
-        // call stats
         getSongStats({
           title: newSong.title,
           artist: newSong.artist,
