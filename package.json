@@ -1,6 +1,7 @@
 {
   "name": "top100-dashboard",
   "version": "0.1.0",
+  "homepage": "https://kaicorstjens.github.io/Top100_Dashboard/",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.1",
