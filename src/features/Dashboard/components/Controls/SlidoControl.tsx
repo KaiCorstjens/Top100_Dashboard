@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../app/store";
 import { setShowSlido } from "../../api/DashboardSlice";
-import { SlidoControlButton } from "./Controls.style";
+import { SlidoControlButton } from "./ControlsModal.style";
 
 export const SlidoControl = () => {
   const dispatch = useDispatch();

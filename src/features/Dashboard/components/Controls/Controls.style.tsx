@@ -7,23 +7,23 @@ export const ControlsContainer = styled.div`
   overflow: hidden;
 `;
 
-export const SlidoControlButton = styled.div`
-  width: 50px;
-  height: 50px;
-  background-color: #ddd;
-`;
+// export const SlidoControlButton = styled.div`
+//   width: 50px;
+//   height: 50px;
+//   background-color: #ddd;
+// `;
 
-export const PollIntervalControlButton = styled.div`
-  width: 50px;
-  height: 50px;
-  background-color: #aaa;
-`;
+// export const PollIntervalControlButton = styled.div`
+//   width: 50px;
+//   height: 50px;
+//   background-color: #aaa;
+// `;
 
-export const SponsorsControlButton = styled.div`
-  width: 50px;
-  height: 50px;
-  background-color: #888;
-`;
+// export const SponsorsControlButton = styled.div`
+//   width: 50px;
+//   height: 50px;
+//   background-color: #888;
+// `;
 
 export const ControlsIconContainer = styled.div`
   opacity: 0;

@@ -2,11 +2,15 @@ import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ThemeProvider } from "styled-components";
+import { getDefaultProfile } from "../../app/profile/profiles";
 import { RootState } from "../../app/store";
 import { defaultTheme } from "../../app/theme/default-theme-tokens";
-import { moerebuukTheme } from "../../app/theme/moerebuuk-theme-tokens";
-import { top100Theme } from "../../app/theme/top100-theme-tokens";
-import { setSong, setSongStats, setToken } from "./api/DashboardSlice";
+import {
+  setProfile,
+  setSong,
+  setSongStats,
+  setToken,
+} from "./api/DashboardSlice";
 import { spotifyApi } from "./api/SpotifyApiSlice";
 import { useLazyGetSongStatsQuery } from "./api/Top100ApiSlice";
 import { Controls } from "./components/Controls/Controls";
@@ -102,8 +106,14 @@ export const Dashboard: React.FC = () => {
     }
   }, [songStatsData, isFetchingSongStats, songStatsError]);
 
+  useEffect(() => {
+    if (profile === undefined) {
+      dispatch(setProfile(getDefaultProfile()));
+    }
+  }, [profile]);
+
   return (
-    <ThemeProvider theme={profile.theme}>
+    <ThemeProvider theme={profile?.theme ?? defaultTheme}>
       <FullScreenDashboard>
         <Controls />
         <SongInfo />

@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../app/store";
 import { setPollingInterval } from "../../api/DashboardSlice";
-import { PollIntervalControlButton } from "./Controls.style";
+import { PollIntervalControlButton } from "./ControlsModal.style";
 
 export const PollIntervalControl = () => {
   const dispatch = useDispatch();

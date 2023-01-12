@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../app/store";
 import { setShowSponsors } from "../../api/DashboardSlice";
-import { SponsorsControlButton } from "./Controls.style";
+import { SponsorsControlButton } from "./ControlsModal.style";
 
 export const SponsorsControl = () => {
   const dispatch = useDispatch();

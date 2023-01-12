@@ -5,8 +5,12 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
+  ModalOptions,
 } from "./ControlsModal.style";
+import { PollIntervalControl } from "./PollIntervalControl";
 import { ProfileSelect } from "./ProfileSelect";
+import { SlidoControl } from "./SlidoControl";
+import { SponsorsControl } from "./SponsorsControl";
 
 export type ControlsModalProps = {
   onCloseClick: () => void;
@@ -27,8 +31,12 @@ export const ControlsModal: React.FC<ControlsModalProps> = (props) => {
           <h2>Dashboard Settings</h2>
         </ModalHeader>
         <ModalBody>
-          <p>Hello hello</p>
-          <ProfileSelect />
+          <ModalOptions>
+            <ProfileSelect />
+            <PollIntervalControl />
+            <SlidoControl />
+            <SponsorsControl />
+          </ModalOptions>
         </ModalBody>
         <ModalFooter></ModalFooter>
       </ModalContent>

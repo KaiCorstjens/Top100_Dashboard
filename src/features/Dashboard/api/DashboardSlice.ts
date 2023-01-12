@@ -5,7 +5,7 @@ import { Profile } from "../../../app/profile/types";
 import { Profiles } from "../../../app/profile/profiles";
 
 interface DashboardState {
-  profile: Profile;
+  profile: Profile | undefined;
   song: Song | undefined;
   token: string | undefined;
   stats: SongStats | undefined;
@@ -15,7 +15,7 @@ interface DashboardState {
 }
 
 const initialState = {
-  profile: Profiles[0],
+  profile: undefined,
   song: undefined,
   token: undefined,
   stats: undefined,
