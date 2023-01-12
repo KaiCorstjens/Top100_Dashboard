@@ -50,7 +50,7 @@ export const callSpotifyAuthorize = () => {
   site_url = site_url.substring(0, site_url.lastIndexOf("/"));
 
   const scope = "user-read-currently-playing";
-  const redirect_uri = site_url + "/spotify_redirect?";
+  const redirect_uri = site_url + "?spotify_redirect&";
   const state = "redirected-from-spotify";
 
   let url = "https://accounts.spotify.com/authorize";
