@@ -1,8 +1,11 @@
 import { ThemeSchema } from "./theme-schema";
 
 export const moerebuukTheme: ThemeSchema = {
-  background: "url('/images/backgrounds/moerebuuk_bg.png')",
-  unknownAlbum: "/images/unknown_album/unknown_album_moerebuuk.png",
+  background:
+    "url('" + process.env.PUBLIC_URL + "/images/backgrounds/moerebuuk_bg.png')",
+  unknownAlbum:
+    process.env.PUBLIC_URL +
+    "/images/unknown_album/unknown_album_moerebuuk.png",
   textColor: "#FFF",
   titleFontSize: "28px",
   votersFontSize: "24px",
