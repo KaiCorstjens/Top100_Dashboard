@@ -1,10 +1,6 @@
 import { createRef } from "react";
-import { ControlsContainer } from "./Controls.style";
 import { ControlsIcon } from "./ControlsIcon";
 import { ControlsModal } from "./ControlsModal";
-import { PollIntervalControl } from "./PollIntervalControl";
-import { SlidoControl } from "./SlidoControl";
-import { SponsorsControl } from "./SponsorsControl";
 
 export const Controls = () => {
   const controlsContainerRef = createRef<HTMLDivElement>();

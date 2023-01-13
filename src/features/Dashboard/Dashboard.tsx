@@ -46,6 +46,7 @@ export const Dashboard: React.FC = () => {
     },
   ] = useLazyGetSongStatsQuery();
 
+  // TODO: Spotify playing gets blocked by adblocker?
   const { data, error: spotifyApiError } = spotifyApi.useGetNowPlayingQuery(
     undefined,
     {
@@ -73,11 +74,7 @@ export const Dashboard: React.FC = () => {
         setConsecutiveSpotifyErrors(0);
       } else {
         console.warn("spotify error", spotifyApiError);
-        console.log(
-          access_token,
-          (spotifyApiError as FetchBaseQueryError).status === 401
-        );
-        setConsecutiveSpotifyErrors(consecutiveSpotifyErrors + 1);
+        //setConsecutiveSpotifyErrors(consecutiveSpotifyErrors + 1);
       }
     }
   }, [spotifyApiError, data, access_token]);
@@ -112,13 +109,21 @@ export const Dashboard: React.FC = () => {
     }
   }, [profile]);
 
+  const slido = () => {
+    return showSlido ? <Slido /> : <></>;
+  };
+
+  const sponsors = () => {
+    return showSponsors ? <Sponsors /> : <></>;
+  };
+
   return (
     <ThemeProvider theme={profile?.theme ?? defaultTheme}>
       <FullScreenDashboard>
         <Controls />
         <SongInfo />
-        <Slido visible={showSlido} />
-        <Sponsors visible={showSponsors} />
+        {slido()}
+        {sponsors()}
       </FullScreenDashboard>
     </ThemeProvider>
   );

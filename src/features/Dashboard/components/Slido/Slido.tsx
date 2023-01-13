@@ -2,6 +2,7 @@ import { StyledSlidoContainer } from "./Slido.style";
 import { SlidoQRCode } from "./SlidoQRCode";
 
 export const Slido = ({ visible = true }) => {
+  console.log("showing slido");
   return (
     <div style={{ display: visible ? "inherit" : "none" }}>
       <StyledSlidoContainer>

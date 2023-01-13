@@ -23,6 +23,7 @@ export const ControlsModal: React.FC<ControlsModalProps> = (props) => {
       props.onCloseClick();
     }
   };
+  // TODO: add option for sponsor interval
   return (
     <ModalContainer ref={props.containerRef}>
       <ModalContent>
