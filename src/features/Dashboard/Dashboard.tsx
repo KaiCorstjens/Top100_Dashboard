@@ -86,7 +86,7 @@ export const Dashboard: React.FC = () => {
         getSongStats({
           title: newSong.title,
           artist: newSong.artist,
-          year: 2022,
+          year: new Date().getFullYear(),
         });
       }
       dispatch(setSong(newSong));

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device } from "../../../../../app/media";
 
 export const TimeBarContainer = styled.div`
   font-size: 22px;
@@ -19,6 +20,10 @@ export const TimeContainer = styled.div`
 
 export const TimeBarProgressionContainer = styled.div`
   display: table-cell;
+  @media (${device.laptopL}) {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
 `;
 
 export const TimeBarProgression = styled.div`

@@ -1,10 +1,9 @@
 import { StyledSlidoContainer } from "./Slido.style";
 import { SlidoQRCode } from "./SlidoQRCode";
 
-export const Slido = ({ visible = true }) => {
-  console.log("showing slido");
+export const Slido = () => {
   return (
-    <div style={{ display: visible ? "inherit" : "none" }}>
+    <>
       <StyledSlidoContainer>
         <iframe
           src="https://app.sli.do/event/vsk6FvFXaxTCAbMV4A2yA9"
@@ -16,6 +15,6 @@ export const Slido = ({ visible = true }) => {
         ></iframe>
       </StyledSlidoContainer>
       <SlidoQRCode />
-    </div>
+    </>
   );
 };

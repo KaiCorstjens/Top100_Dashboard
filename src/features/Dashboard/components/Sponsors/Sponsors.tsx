@@ -5,7 +5,7 @@ import { SponsorsContainer, SponsorsImage } from "./Sponsors.style";
 import { useContext } from "react";
 import { ThemeContext } from "styled-components";
 
-export const Sponsors = ({ visible = true }) => {
+export const Sponsors = () => {
   const [images, setImages] = useState<File[]>([]);
   const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [imageIndex, setImageIndex] = useState<number>(-1);
@@ -46,7 +46,7 @@ export const Sponsors = ({ visible = true }) => {
   }, [imageUrls.length, showSponsors]);
 
   return (
-    <SponsorsContainer style={{ display: visible ? "inherit" : "none" }}>
+    <SponsorsContainer>
       <SponsorsImage
         src={
           imageUrls.length > 0

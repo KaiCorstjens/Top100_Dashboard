@@ -23,11 +23,15 @@ export const TimeBar: React.FC<TimeBarProps> = (props) => {
   const timeBar = React.useCallback(() => {
     return (
       <TimeBarContainer>
-        <TimeContainer>{timeElapsedString}</TimeContainer>
+        <TimeContainer style={{ paddingLeft: "5px" }}>
+          {timeElapsedString}
+        </TimeContainer>
         <TimeBarProgressionContainer>
           <TimeBarProgression style={{ width: progressed + "%" }} />
         </TimeBarProgressionContainer>
-        <TimeContainer>{timeTotalString}</TimeContainer>
+        <TimeContainer style={{ paddingRight: "5px" }}>
+          {timeTotalString}
+        </TimeContainer>
       </TimeBarContainer>
     );
   }, [progressed, timeElapsedString, timeTotalString]);
