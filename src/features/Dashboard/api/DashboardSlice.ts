@@ -12,6 +12,7 @@ interface DashboardState {
   showSlido: boolean;
   showSponsors: boolean;
   pollingInterval: number;
+  sponsorInterval: number;
 }
 
 const initialState = {
@@ -22,6 +23,7 @@ const initialState = {
   showSlido: false,
   showSponsors: true,
   pollingInterval: 200,
+  sponsorInterval: 2500,
 } as DashboardState;
 
 const dashboardSlice = createSlice({
@@ -52,6 +54,9 @@ const dashboardSlice = createSlice({
     setPollingInterval(state, action: PayloadAction<number>) {
       state.pollingInterval = action.payload;
     },
+    setSponsorInterval(state, action: PayloadAction<number>) {
+      state.sponsorInterval = action.payload;
+    },
   },
 });
 
@@ -63,5 +68,6 @@ export const {
   setShowSlido,
   setShowSponsors,
   setPollingInterval,
+  setSponsorInterval,
 } = dashboardSlice.actions;
 export default dashboardSlice.reducer;

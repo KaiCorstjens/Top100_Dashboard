@@ -88,6 +88,10 @@ export const SponsorsControlButton = styled.div`
   ${optionCss}
 `;
 
+export const SponsorIntervalControlButton = styled.div`
+  ${optionCss}
+`;
+
 export const ProfileControlSelect = styled.div`
   ${optionCss}
   & select {

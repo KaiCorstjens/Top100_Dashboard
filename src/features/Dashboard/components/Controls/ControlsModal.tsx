@@ -10,6 +10,7 @@ import {
 import { PollIntervalControl } from "./PollIntervalControl";
 import { ProfileSelect } from "./ProfileSelect";
 import { SlidoControl } from "./SlidoControl";
+import { SponsorIntervalControl } from "./SponsorIntervalControl";
 import { SponsorsControl } from "./SponsorsControl";
 
 export type ControlsModalProps = {
@@ -37,6 +38,7 @@ export const ControlsModal: React.FC<ControlsModalProps> = (props) => {
             <PollIntervalControl />
             <SlidoControl />
             <SponsorsControl />
+            <SponsorIntervalControl />
           </ModalOptions>
         </ModalBody>
         <ModalFooter></ModalFooter>

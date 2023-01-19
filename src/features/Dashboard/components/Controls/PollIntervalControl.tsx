@@ -27,7 +27,7 @@ export const PollIntervalControl = () => {
   };
   return (
     <PollIntervalControlButton onClick={handleButtonOnClick}>
-      Interval
+      Spotify Interval
     </PollIntervalControlButton>
   );
 };

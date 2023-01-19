@@ -9,8 +9,9 @@ export const Sponsors = () => {
   const [images, setImages] = useState<File[]>([]);
   const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [imageIndex, setImageIndex] = useState<number>(-1);
-  const { showSponsors } = useSelector((state: RootState) => state.dashboard);
-  const delay = 2500;
+  const { showSponsors, sponsorInterval } = useSelector(
+    (state: RootState) => state.dashboard
+  );
   const imageRef = createRef<HTMLImageElement>();
   const inputRef = createRef<HTMLInputElement>();
   const themeContext = useContext(ThemeContext);
@@ -41,9 +42,9 @@ export const Sponsors = () => {
       setImageIndex((index) => {
         return index + 1 < imageUrls.length ? index + 1 : 0;
       });
-    }, delay);
+    }, sponsorInterval);
     return () => clearInterval(interval);
-  }, [imageUrls.length, showSponsors]);
+  }, [imageUrls.length, showSponsors, sponsorInterval]);
 
   return (
     <SponsorsContainer>
