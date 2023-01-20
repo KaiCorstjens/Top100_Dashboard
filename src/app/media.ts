@@ -1,22 +1,26 @@
-import { css } from "styled-components";
-
-const size = {
+const width = {
   mobileS: "320px",
   mobileM: "375px",
   mobileL: "425px",
-  tablet: "768px",
+  tablet: "1024px", //675px
   laptop: "1024px",
   laptopL: "1440px",
   desktop: "2560px",
 };
 
-export const device = {
-  mobileS: `(max-width: ${size.mobileS})`,
-  mobileM: `(max-width: ${size.mobileM})`,
-  mobileL: `(max-width: ${size.mobileL})`,
-  tablet: `(max-width: ${size.tablet})`,
-  laptop: `(max-width: ${size.laptop})`,
-  laptopL: `(max-width: ${size.laptopL})`,
-  desktop: `(max-width: ${size.desktop})`,
+export const deviceWidth = {
+  mobileS: `(max-width: ${width.mobileS})`,
+  mobileM: `(max-width: ${width.mobileM})`,
+  mobileL: `(max-width: ${width.mobileL})`,
+  tablet: `(max-width: ${width.tablet})`,
+  laptop: `(max-width: ${width.laptop})`,
+  laptopL: `(max-width: ${width.laptopL})`,
+  desktop: `(max-width: ${width.desktop})`,
   desktopL: `(max-width: 9999px)`,
+};
+
+export const deviceHeight = {
+  //937
+
+  desktop: "937px",
 };

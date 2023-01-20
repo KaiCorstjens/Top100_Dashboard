@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { device } from "../../../../../app/media";
+import { deviceWidth } from "../../../../../app/media";
 
 export const SongStatsContainer = styled.div`
   position: relative;
@@ -19,7 +19,7 @@ export const SongStatsContainer = styled.div`
   float: left;
   max-height: 500px;
   overflow: hidden;
-  @media (${device.laptopL}) {
+  @media (${deviceWidth.tablet}) {
     margin-top: 0px;
     width: 100%;
     border-radius: ${(props) => props.theme.borderRadius};
@@ -34,7 +34,7 @@ export const SongVotersContainer = styled.div`
 `;
 
 export const SongStatsMobileContainer = styled.div`
-  @media (${device.laptopL}) {
+  @media (${deviceWidth.tablet}) {
     margin-left: 5%;
   }
 `;

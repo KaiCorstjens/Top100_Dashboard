@@ -37,20 +37,14 @@ export const Dashboard: React.FC = () => {
 
   const access_token = getAccessTokenFromUrl(window.location.href);
 
-  const [
-    getSongStats,
-    {
-      data: songStatsData,
-      isFetching: isFetchingSongStats,
-      isError: songStatsError,
-    },
-  ] = useLazyGetSongStatsQuery();
+  const [getSongStats] = useLazyGetSongStatsQuery();
 
   // TODO: Spotify playing gets blocked by adblocker?
   const { data, error: spotifyApiError } = spotifyApi.useGetNowPlayingQuery(
     undefined,
     {
       pollingInterval: pollingInterval,
+      refetchOnMountOrArgChange: true,
     }
   );
 
@@ -62,6 +56,7 @@ export const Dashboard: React.FC = () => {
     }
   }, [access_token, dispatch, pollingInterval]);
 
+  // Spotify Authorization
   useEffect(() => {
     if (spotifyApiError) {
       if (
@@ -72,13 +67,20 @@ export const Dashboard: React.FC = () => {
       ) {
         callSpotifyAuthorize();
         setConsecutiveSpotifyErrors(0);
+      } else if (
+        (spotifyApiError as FetchBaseQueryError).status === "FETCH_ERROR"
+      ) {
+        console.warn(
+          "Spotify request possibly blocked on source, please disable ad blockers"
+        );
       } else {
         console.warn("spotify error", spotifyApiError);
-        //setConsecutiveSpotifyErrors(consecutiveSpotifyErrors + 1);
+        setConsecutiveSpotifyErrors((prevState) => prevState + 1);
       }
     }
   }, [spotifyApiError, data, access_token]);
 
+  // Spotify currently playing
   useEffect(() => {
     if (data) {
       const newSong: Song = SpotifyDataToSong(data);
@@ -87,21 +89,14 @@ export const Dashboard: React.FC = () => {
           title: newSong.title,
           artist: newSong.artist,
           year: new Date().getFullYear(),
-        });
+        })
+          .unwrap()
+          .then((songStats) => dispatch(setSongStats(songStats)))
+          .catch(() => dispatch(setSongStats(undefined)));
       }
       dispatch(setSong(newSong));
     }
-  }, [data, getSongStats, dispatch]); // DON'T add song as a dependency!
-
-  useEffect(() => {
-    if (!isFetchingSongStats) {
-      if (songStatsError) {
-        dispatch(setSongStats(undefined));
-      } else {
-        dispatch(setSongStats(songStatsData));
-      }
-    }
-  }, [songStatsData, isFetchingSongStats, songStatsError]);
+  }, [data, getSongStats]); // DON'T add song as a dependency!
 
   useEffect(() => {
     if (profile === undefined) {
@@ -109,21 +104,13 @@ export const Dashboard: React.FC = () => {
     }
   }, [profile]);
 
-  const slido = () => {
-    return showSlido ? <Slido /> : <></>;
-  };
-
-  const sponsors = () => {
-    return showSponsors ? <Sponsors /> : <></>;
-  };
-
   return (
     <ThemeProvider theme={profile?.theme ?? defaultTheme}>
       <FullScreenDashboard>
         <Controls />
         <SongInfo />
-        {slido()}
-        {sponsors()}
+        {showSlido && <Slido />}
+        {showSponsors && <Sponsors />}
       </FullScreenDashboard>
     </ThemeProvider>
   );

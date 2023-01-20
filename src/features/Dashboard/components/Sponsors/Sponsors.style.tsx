@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { device } from "../../../../app/media";
+import { deviceWidth } from "../../../../app/media";
 
 export const SponsorsContainer = styled.div`
   width: 200px;
@@ -10,7 +10,7 @@ export const SponsorsContainer = styled.div`
   top: 0;
   text-align: center;
   cursor: pointer;
-  @media (${device.laptopL}) {
+  @media (${deviceWidth.tablet}) {
     display: none;
   }
 `;
