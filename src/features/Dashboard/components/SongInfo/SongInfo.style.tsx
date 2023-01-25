@@ -17,6 +17,7 @@ export const SongInfoContainer = styled.div`
   margin-top: 5%;
   margin-left: auto;
   margin-right: auto;
+  display: table;
   @media (${deviceWidth.tablet}) {
     margin-top: 10%;
     width: 90vw;

@@ -2,7 +2,9 @@ import { ThemeSchema } from "./theme-schema";
 
 export const moerebuukTheme: ThemeSchema = {
   background:
-    "url('" + process.env.PUBLIC_URL + "/images/backgrounds/moerebuuk_bg.png')",
+    "url('" +
+    process.env.PUBLIC_URL +
+    "/images/backgrounds/moerebuuk_background.jpg')",
   unknownAlbum:
     process.env.PUBLIC_URL +
     "/images/unknown_album/unknown_album_moerebuuk.png",

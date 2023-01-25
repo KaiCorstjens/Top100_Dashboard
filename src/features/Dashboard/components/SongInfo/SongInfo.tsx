@@ -18,7 +18,6 @@ export const SongInfo: React.FC = () => {
   return (
     <SongInfoContainer
       style={{
-        display: showSlido ? "inherit" : "table",
         marginLeft: showSlido ? "10%" : "auto",
       }}
     >
