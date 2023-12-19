@@ -12,6 +12,9 @@ import { ProfileSelect } from "./ProfileSelect";
 import { SlidoControl } from "./SlidoControl";
 import { SponsorIntervalControl } from "./SponsorIntervalControl";
 import { SponsorsControl } from "./SponsorsControl";
+import { PosterIntervalControl } from "./PosterIntervalControl";
+import { PosterControl } from "./PosterControl";
+import { StatsControl } from "./StatsControl";
 
 export type ControlsModalProps = {
   onCloseClick: () => void;
@@ -39,6 +42,9 @@ export const ControlsModal: React.FC<ControlsModalProps> = (props) => {
             <SlidoControl />
             <SponsorsControl />
             <SponsorIntervalControl />
+            <StatsControl />
+            <PosterControl />
+            <PosterIntervalControl />
           </ModalOptions>
         </ModalBody>
         <ModalFooter></ModalFooter>

@@ -6,6 +6,7 @@ import { AlbumArt } from "./components/AlbumArt";
 import { useSelector } from "react-redux";
 import { Song } from "../../types";
 import { RootState } from "../../../../app/store";
+import { Poster } from "../Poster/Poster";
 
 export const SongInfo: React.FC = () => {
   const song: Song | undefined = useSelector(
@@ -13,6 +14,13 @@ export const SongInfo: React.FC = () => {
   );
   const showSlido: boolean = useSelector(
     (state: RootState) => state.dashboard.showSlido
+  );
+
+  const showStats: boolean = useSelector(
+    (state: RootState) => state.dashboard.showStats
+  );
+  const showPoster: boolean = useSelector(
+    (state: RootState) => state.dashboard.showPoster
   );
 
   return (
@@ -26,7 +34,8 @@ export const SongInfo: React.FC = () => {
         <AlbumArt album_art_url={song?.album_art_url} />
         <TimeBar song={song} />
       </AlbumArtContainer>
-      <SongStats />
+      {showStats && <SongStats />}
+      {showPoster && <Poster />}
     </SongInfoContainer>
   );
 };

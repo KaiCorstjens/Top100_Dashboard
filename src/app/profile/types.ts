@@ -6,5 +6,7 @@ export type Profile = {
   theme: ThemeSchema;
   interval: number;
   showChat: boolean;
+  showStats: boolean;
+  showPoster: boolean;
   showSponsors: boolean;
 };

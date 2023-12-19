@@ -92,6 +92,18 @@ export const SponsorIntervalControlButton = styled.div`
   ${optionCss}
 `;
 
+export const PosterControlButton = styled.div`
+  ${optionCss}
+`;
+
+export const PosterIntervalControlButton = styled.div`
+  ${optionCss}
+`;
+
+export const StatsControlButton = styled.div`
+  ${optionCss}
+`;
+
 export const ProfileControlSelect = styled.div`
   ${optionCss}
   & select {

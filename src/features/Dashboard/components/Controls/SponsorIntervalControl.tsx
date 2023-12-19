@@ -11,7 +11,7 @@ export const SponsorIntervalControl = () => {
 
   const handleButtonOnClick = () => {
     const prompt_input = prompt(
-      "Please enter new polling interval in ms:",
+      "Please enter new sponsor change interval in ms:",
       sponsorInterval.toString()
     );
 

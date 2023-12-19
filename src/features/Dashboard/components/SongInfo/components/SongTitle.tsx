@@ -18,12 +18,16 @@ export const SongTitle: React.FC<SongTitleProps> = (props) => {
     (state: RootState) => state.dashboard.stats
   );
 
+  const showStats: boolean = useSelector(
+    (state: RootState) => state.dashboard.showStats
+  );
+
   return (
     <SongContainer>
       <SongNumberContainer
         style={{ display: stats?.position ? "inherit" : "none" }}
       >
-        <SongNumber>{"#" + stats?.position}</SongNumber>
+        {showStats && <SongNumber>{"#" + stats?.position}</SongNumber>}
       </SongNumberContainer>
       <SongTitleContainer>
         {props.song?.title}

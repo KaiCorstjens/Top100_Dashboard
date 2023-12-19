@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { Song, SongStats } from "../types";
 import { Profile } from "../../../app/profile/types";
-import { Profiles } from "../../../app/profile/profiles";
 
 interface DashboardState {
   profile: Profile | undefined;
@@ -11,8 +10,12 @@ interface DashboardState {
   stats: SongStats | undefined;
   showSlido: boolean;
   showSponsors: boolean;
+  showStats: boolean;
   pollingInterval: number;
   sponsorInterval: number;
+  showPoster: boolean;
+  posterInterval: number;
+  posterShowTime: number;
 }
 
 const initialState = {
@@ -22,8 +25,12 @@ const initialState = {
   stats: undefined,
   showSlido: false,
   showSponsors: true,
+  showStats: false,
   pollingInterval: 200,
-  sponsorInterval: 2500,
+  sponsorInterval: 5000,
+  showPoster: true,
+  posterInterval: 900000, // 15 minutes
+  posterShowTime: 30000, // 30 seconds
 } as DashboardState;
 
 const dashboardSlice = createSlice({
@@ -35,6 +42,8 @@ const dashboardSlice = createSlice({
       state.showSlido = action.payload.showChat;
       state.showSponsors = action.payload.showSponsors;
       state.pollingInterval = action.payload.interval;
+      state.showStats = action.payload.showStats;
+      state.showPoster = action.payload.showPoster;
     },
     setSong(state, action: PayloadAction<Song>) {
       state.song = action.payload;
@@ -51,11 +60,23 @@ const dashboardSlice = createSlice({
     setShowSponsors(state, action: PayloadAction<boolean>) {
       state.showSponsors = action.payload;
     },
+    setShowStats(state, action: PayloadAction<boolean>) {
+      state.showStats = action.payload;
+    },
     setPollingInterval(state, action: PayloadAction<number>) {
       state.pollingInterval = action.payload;
     },
     setSponsorInterval(state, action: PayloadAction<number>) {
       state.sponsorInterval = action.payload;
+    },
+    setShowPoster(state, action: PayloadAction<boolean>) {
+      state.showPoster = action.payload;
+    },
+    setPosterInterval(state, action: PayloadAction<number>) {
+      state.posterInterval = action.payload;
+    },
+    setPosterShowTime(state, action: PayloadAction<number>) {
+      state.posterShowTime = action.payload;
     },
   },
 });
@@ -67,7 +88,11 @@ export const {
   setSongStats,
   setShowSlido,
   setShowSponsors,
+  setShowStats,
   setPollingInterval,
   setSponsorInterval,
+  setShowPoster,
+  setPosterInterval,
+  setPosterShowTime,
 } = dashboardSlice.actions;
 export default dashboardSlice.reducer;

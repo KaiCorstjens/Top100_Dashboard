@@ -14,6 +14,7 @@ import {
 import { spotifyApi } from "./api/SpotifyApiSlice";
 import { useLazyGetSongStatsQuery } from "./api/Top100ApiSlice";
 import { Controls } from "./components/Controls/Controls";
+import { Poster } from "./components/Poster/Poster";
 import { Slido } from "./components/Slido/Slido";
 import { SongInfo } from "./components/SongInfo/SongInfo";
 import { Sponsors } from "./components/Sponsors/Sponsors";
@@ -32,8 +33,14 @@ export const Dashboard: React.FC = () => {
   const [consecutiveSpotifyErrors, setConsecutiveSpotifyErrors] =
     useState<number>(0);
 
-  const { profile, pollingInterval, showSlido, showSponsors, song } =
-    useSelector((state: RootState) => state.dashboard);
+  const {
+    profile,
+    pollingInterval,
+    showSlido,
+    showSponsors,
+    showPoster,
+    song,
+  } = useSelector((state: RootState) => state.dashboard);
 
   const access_token = getAccessTokenFromUrl(window.location.href);
 
@@ -88,7 +95,7 @@ export const Dashboard: React.FC = () => {
         getSongStats({
           title: newSong.title,
           artist: newSong.artist,
-          year: new Date().getFullYear(),
+          year: 2022,
         })
           .unwrap()
           .then((songStats) => dispatch(setSongStats(songStats)))

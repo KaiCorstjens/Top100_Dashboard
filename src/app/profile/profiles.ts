@@ -2,7 +2,7 @@ import { moerebuukTheme } from "../theme/moerebuuk-theme-tokens";
 import { top100Theme } from "../theme/top100-theme-tokens";
 import { Profile } from "./types";
 
-const profileIdIdentifier = "profileId";
+const profileIdIdentifier = "profile";
 
 const popellProfile: Profile = {
   id: 1,
@@ -10,7 +10,9 @@ const popellProfile: Profile = {
   theme: top100Theme,
   interval: 200,
   showChat: false,
+  showStats: true,
   showSponsors: true,
+  showPoster: true,
 };
 
 const moerebuukProfile: Profile = {
@@ -19,7 +21,9 @@ const moerebuukProfile: Profile = {
   theme: moerebuukTheme,
   interval: 200,
   showChat: false,
+  showStats: false,
   showSponsors: false,
+  showPoster: false,
 };
 
 export const getDefaultProfile = (): Profile => {
