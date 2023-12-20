@@ -11,7 +11,7 @@ const popellProfile: Profile = {
   interval: 200,
   showChat: false,
   showStats: true,
-  showSponsors: true,
+  showSponsors: false,
   showPoster: true,
 };
 

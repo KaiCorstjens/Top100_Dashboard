@@ -33,14 +33,8 @@ export const Dashboard: React.FC = () => {
   const [consecutiveSpotifyErrors, setConsecutiveSpotifyErrors] =
     useState<number>(0);
 
-  const {
-    profile,
-    pollingInterval,
-    showSlido,
-    showSponsors,
-    showPoster,
-    song,
-  } = useSelector((state: RootState) => state.dashboard);
+  const { profile, pollingInterval, showSlido, showSponsors, song } =
+    useSelector((state: RootState) => state.dashboard);
 
   const access_token = getAccessTokenFromUrl(window.location.href);
 
@@ -95,7 +89,7 @@ export const Dashboard: React.FC = () => {
         getSongStats({
           title: newSong.title,
           artist: newSong.artist,
-          year: 2022,
+          year: new Date().getFullYear(),
         })
           .unwrap()
           .then((songStats) => dispatch(setSongStats(songStats)))

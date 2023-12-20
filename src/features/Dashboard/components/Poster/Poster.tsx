@@ -7,8 +7,11 @@ import { ThemeContext } from "styled-components";
 
 export const Poster = () => {
   const [images, setImages] = useState<File[]>([]);
-  const [imageUrls, setImageUrls] = useState<string[]>([]);
-  const [imageIndex, setImageIndex] = useState<number>(-1);
+  // const [imageUrls, setImageUrls] = useLocalStorage<string[]>(
+  //   "posterImageUrls",
+  //   []
+  // );
+  const [imageIndex, setImageIndex] = useState<number>(0);
   const [shouldShowPosterGivenTime, setShouldShowPosterGivenTime] =
     useState<boolean>(true);
 
@@ -19,23 +22,35 @@ export const Poster = () => {
   const inputRef = createRef<HTMLInputElement>();
   const themeContext = useContext(ThemeContext);
 
-  const onImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const images: FileList | null = e.target.files;
-    if (images != null) {
-      setImages(Array.from(images));
-    }
-  };
+  const imageUrls = [
+    "/Top100_Dashboard/images/posters/1.jpg",
+    "/Top100_Dashboard//images/posters/2.jpg",
+    "/Top100_Dashboard//images/posters/3.jpg",
+  ];
 
-  useEffect(() => {
-    if (images && images.length > 0) {
-      const newImageUrls: string[] = [];
-      Array.from(images).forEach((image) =>
-        newImageUrls.push(URL.createObjectURL(image))
-      );
-      setImageUrls(newImageUrls);
-      setImageIndex(0);
-    }
-  }, [images]);
+  // const onImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+  //   const images: FileList | null = e.target.files;
+  //   if (images != null) {
+  //    setImages(images);
+  //   }
+
+  //   /*if (images != null) {
+  //     setImages(Array.from(images));
+  //   }*/
+  // };
+
+  // useEffect(() => {
+  //   if (images && images.length > 0) {
+  //     const newImageUrls: string[] = [];
+  //     Array.from(images).forEach((image) =>
+  //       newImageUrls.push(URL.createObjectURL(image))
+  //     );
+  //     setImageUrls(newImageUrls);
+  //     console.log(newImageUrls);
+  //     setImageIndex(0);
+  //     localStorage.setItem("imageIndex", "0");
+  //   }
+  // }, [images]);
 
   useEffect(() => {
     if (shouldShowPosterGivenTime) {
@@ -46,12 +61,12 @@ export const Poster = () => {
         setImageIndex((index) => {
           return index + 1 < imageUrls.length ? index + 1 : 0;
         });
+        console.log(imageIndex);
         setShouldShowPosterGivenTime(false);
-        //alert("poster: " + shouldShowPosterGivenTime);
-      }, posterInterval);
+      }, posterShowTime);
       return () => clearInterval(interval);
     }
-  }, [imageUrls.length, showPoster, posterInterval, shouldShowPosterGivenTime]);
+  }, [imageUrls.length, showPoster, posterShowTime, shouldShowPosterGivenTime]);
 
   useEffect(() => {
     if (!shouldShowPosterGivenTime) {
@@ -60,11 +75,10 @@ export const Poster = () => {
           clearInterval(interval);
         }
         setShouldShowPosterGivenTime(true);
-      }, posterShowTime);
+      }, posterInterval);
       return () => clearInterval(interval);
     }
-  }, [imageUrls.length, showPoster, posterShowTime, shouldShowPosterGivenTime]);
-  console.log("poster: " + shouldShowPosterGivenTime);
+  }, [imageUrls.length, showPoster, posterInterval, shouldShowPosterGivenTime]);
   return (
     <PosterContainer
       style={{ display: shouldShowPosterGivenTime ? "inherit" : "none" }}
@@ -83,7 +97,7 @@ export const Poster = () => {
         type="file"
         multiple
         accept="image/*"
-        onChange={(e) => onImageChange(e)}
+        //onChange={(e) => onImageChange(e)}
         ref={inputRef}
         style={{ visibility: "hidden" }}
       />
