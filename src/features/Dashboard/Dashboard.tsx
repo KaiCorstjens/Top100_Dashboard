@@ -89,10 +89,18 @@ export const Dashboard: React.FC = () => {
         getSongStats({
           title: newSong.title,
           artist: newSong.artist,
+          spotify_uri: newSong.spotify_uri,
           year: new Date().getFullYear(),
         })
           .unwrap()
-          .then((songStats) => dispatch(setSongStats(songStats)))
+          .then((songStats) => {
+            // Kut oplossing omdat Jur zijn werk niet fatsoenlijk doet
+            if (songStats?.position <= 150) {
+              dispatch(setSongStats(songStats));
+            } else {
+              dispatch(setSongStats(undefined));
+            }
+          })
           .catch(() => dispatch(setSongStats(undefined)));
       }
       dispatch(setSong(newSong));
