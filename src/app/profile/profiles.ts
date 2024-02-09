@@ -34,7 +34,7 @@ export const getDefaultProfile = (): Profile => {
       return foundProfile;
     }
   }
-  const defaultProfile = Profiles[0];
+  const defaultProfile = Profiles[1]; // 0 for popell, 1 for moerebuuk
   saveDefaultProfile(defaultProfile.id.toString());
   return defaultProfile;
 };
