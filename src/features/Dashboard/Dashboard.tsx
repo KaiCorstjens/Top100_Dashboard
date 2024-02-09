@@ -96,6 +96,7 @@ export const Dashboard: React.FC = () => {
           .then((songStats) => {
             // Kut oplossing omdat Jur zijn werk niet fatsoenlijk doet
             if (songStats?.points >= 1 || songStats?.position <= 150) {
+              console.log(songStats, songStats?.points >= 1, songStats?.position<=150);
               dispatch(setSongStats(songStats));
             } else {
               dispatch(setSongStats(undefined));
