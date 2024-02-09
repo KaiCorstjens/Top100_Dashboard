@@ -99,6 +99,7 @@ export const Dashboard: React.FC = () => {
               console.log(songStats, songStats?.points >= 1, songStats?.position<=150);
               dispatch(setSongStats(songStats));
             } else {
+              console.log("dispatch undefined");
               dispatch(setSongStats(undefined));
             }
           })
