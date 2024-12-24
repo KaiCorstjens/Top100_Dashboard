@@ -14,7 +14,6 @@ import {
 import { spotifyApi } from "./api/SpotifyApiSlice";
 import { useLazyGetSongStatsQuery } from "./api/Top100ApiSlice";
 import { Controls } from "./components/Controls/Controls";
-import { Poster } from "./components/Poster/Poster";
 import { Slido } from "./components/Slido/Slido";
 import { SongInfo } from "./components/SongInfo/SongInfo";
 import { Sponsors } from "./components/Sponsors/Sponsors";

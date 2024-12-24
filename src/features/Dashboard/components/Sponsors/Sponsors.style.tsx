@@ -2,7 +2,8 @@ import styled from "styled-components";
 import { deviceWidth } from "../../../../app/media";
 
 export const SponsorsContainer = styled.div`
-  width: 200px;
+  max-width: 400px;
+  width: auto;
   height: 200px;
   position: fixed;
   background-color: rgba(0, 0, 0, 0.1);
@@ -10,6 +11,7 @@ export const SponsorsContainer = styled.div`
   top: 0;
   text-align: center;
   cursor: pointer;
+  display: flex;
   @media (${deviceWidth.tablet}) {
     display: none;
   }
@@ -17,4 +19,5 @@ export const SponsorsContainer = styled.div`
 
 export const SponsorsImage = styled.img`
   max-height: 200px;
+  object-fit: contain;
 `;

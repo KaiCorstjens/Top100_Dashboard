@@ -9,7 +9,7 @@ export const Controls = () => {
     if (controlsContainerRef.current) {
       controlsContainerRef.current.style.display = open ? "inherit" : "none";
     } else {
-      console.warn("no controsl ref found");
+      console.warn("no controls ref found");
     }
   };
 
