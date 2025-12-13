@@ -29,6 +29,7 @@ export const SpotifyDataToSong = (
 };
 
 export const getAccessTokenFromUrl = (url: string) => {
+  console.log("token url: "+url);
   if (url === undefined) {
     return undefined;
   }

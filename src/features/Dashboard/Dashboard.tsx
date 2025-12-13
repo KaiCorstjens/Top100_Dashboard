@@ -50,8 +50,10 @@ export const Dashboard: React.FC = () => {
 
   useEffect(() => {
     if (access_token) {
+      console.log("token: "+access_token)
       dispatch(setToken(access_token));
     } else {
+      console.log("Call authorizing")
       callSpotifyAuthorize();
     }
   }, [access_token, dispatch, pollingInterval]);
