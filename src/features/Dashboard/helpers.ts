@@ -29,7 +29,7 @@ export const SpotifyDataToSong = (
 };
 
 export const getAccessTokenFromUrl = (url: string) => {
-  console.log("token url: "+url);
+  console.log("token url: " + url);
   if (url === undefined) {
     return undefined;
   }
@@ -46,7 +46,7 @@ export const getAccessTokenFromUrl = (url: string) => {
 
 export const callSpotifyAuthorize = () => {
   const client_id = SPOTIFY_CLIENT_ID;
-  const response_type = "token";
+  const response_type = "code";
   let site_url = window.location.href;
   site_url = site_url.substring(0, site_url.lastIndexOf("/"));
 
