@@ -16,12 +16,12 @@ export const spotifyApi = createApi({
   endpoints: (builder) => ({
     getNowPlaying: builder.query<SpotifyPlayingResponse, void>({
       query: () => "/v1/me/player/currently-playing",
-    })
+    }),
   }),
 });
 
 export const spotifyAuthApi = createApi({
-   reducerPath: "spotifyApi",
+  reducerPath: "spotifyApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://accounts.spotify.com/api/",
     prepareHeaders: (headers, { getState }) => {
@@ -31,12 +31,12 @@ export const spotifyAuthApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    getAccessToken: builder.query<SpotifyTokenResponse, {code: string}>({
+    getAccessToken: builder.query<SpotifyTokenResponse, { code : string}>({
       query: (params) => ({
         url: "/token",
-        params: params
-      })
-    })
+        params: params,
+      }),
+    }),
   }),
 });
 
