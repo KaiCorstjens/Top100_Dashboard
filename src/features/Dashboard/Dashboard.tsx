@@ -11,7 +11,7 @@ import {
   setSongStats,
   setToken,
 } from "./api/DashboardSlice";
-import { spotifyApi } from "./api/SpotifyApiSlice";
+import { spotifyApi, spotifyAuthApi } from "./api/SpotifyApiSlice";
 import { useLazyGetSongStatsQuery } from "./api/Top100ApiSlice";
 import { Controls } from "./components/Controls/Controls";
 import { Slido } from "./components/Slido/Slido";
@@ -21,11 +21,11 @@ import { Sponsors } from "./components/Sponsors/Sponsors";
 import { FullScreenDashboard } from "./Dashboard.style";
 import {
   callSpotifyAuthorize,
-  getAccessTokenFromUrl,
+  getAccessCodeFromUrl,
   isDifferentSong,
   SpotifyDataToSong,
 } from "./helpers";
-import { Song } from "./types";
+import { Song, SpotifyTokenResponse } from "./types";
 
 export const Dashboard: React.FC = () => {
   const dispatch = useDispatch();
@@ -35,7 +35,9 @@ export const Dashboard: React.FC = () => {
   const { profile, pollingInterval, showSlido, showSponsors, song } =
     useSelector((state: RootState) => state.dashboard);
 
-  const access_token = getAccessTokenFromUrl(window.location.href);
+  const access_code = getAccessCodeFromUrl(window.location.href);
+
+   const [spotify_auth] = spotifyAuthApi.useGetAccessTokenQuery();
 
   const [getSongStats] = useLazyGetSongStatsQuery();
 
@@ -49,14 +51,25 @@ export const Dashboard: React.FC = () => {
   );
 
   useEffect(() => {
-    if (access_token) {
-      console.log("token: " + access_token);
-      dispatch(setToken(access_token));
+    if (access_code) {
+      console.log("token: " + access_code);
+      spotify_auth({
+
+      })
+      var response = spotifyAuthApi.useGetAccessTokenQuery({code: access_code});
+      console.log(response);
+      var token = response.data;
+        console.log(token);
+        if (typeof token !== 'undefined'){
+          dispatch(setToken(token.access_token));
+        } else {
+          window.alert("error with token: " + token);
+        }
     } else {
       console.log("Call authorizing");
       callSpotifyAuthorize();
     }
-  }, [access_token, dispatch, pollingInterval]);
+  }, [access_code, dispatch, pollingInterval]);
 
   // Spotify Authorization
   useEffect(() => {

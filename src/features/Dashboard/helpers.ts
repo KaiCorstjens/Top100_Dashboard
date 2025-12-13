@@ -28,20 +28,20 @@ export const SpotifyDataToSong = (
   return receivedSong;
 };
 
-export const getAccessTokenFromUrl = (url: string) => {
+export const getAccessCodeFromUrl = (url: string) => {
   console.log("token url: " + url);
   if (url === undefined) {
     return undefined;
   }
-  const access_token_first_split = url.split("access_token=");
-  if (access_token_first_split.length < 2) {
+  const access_code_first_split = url.split("code=");
+  if (access_code_first_split.length < 2) {
     return undefined;
   }
-  const access_token_param = access_token_first_split[1].split("&");
-  if (access_token_param.length < 1) {
+  const access_code_param = access_code_first_split[1].split("&");
+  if (access_code_param.length < 1) {
     return undefined;
   }
-  return access_token_param[0];
+  return access_code_param[0];
 };
 
 export const callSpotifyAuthorize = () => {
