@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Top100_Dashboard/static/css/main.e6c13ad2.css",
-    "main.js": "/Top100_Dashboard/static/js/main.ee1a4be5.js",
+    "main.js": "/Top100_Dashboard/static/js/main.a661111e.js",
     "static/js/496.7cab6e90.chunk.js": "/Top100_Dashboard/static/js/496.7cab6e90.chunk.js",
     "static/media/1.png": "/Top100_Dashboard/static/media/1.1bf1b82d80a5d393d076.png",
     "static/media/Blacktree schermbeeld6.jpg": "/Top100_Dashboard/static/media/Blacktree schermbeeld6.4cdb081559865a8d9e67.jpg",
@@ -16,11 +16,11 @@
     "static/media/krebotec.jpeg": "/Top100_Dashboard/static/media/krebotec.285412dd1e755446b5a4.jpeg",
     "index.html": "/Top100_Dashboard/index.html",
     "main.e6c13ad2.css.map": "/Top100_Dashboard/static/css/main.e6c13ad2.css.map",
-    "main.ee1a4be5.js.map": "/Top100_Dashboard/static/js/main.ee1a4be5.js.map",
+    "main.a661111e.js.map": "/Top100_Dashboard/static/js/main.a661111e.js.map",
     "496.7cab6e90.chunk.js.map": "/Top100_Dashboard/static/js/496.7cab6e90.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.ee1a4be5.js"
+    "static/js/main.a661111e.js"
   ]
 }
