@@ -11,6 +11,7 @@ const popellProfile: Profile = {
   interval: 200,
   showChat: false,
   showStats: true,
+  showVoters: false,
   showSponsors: true,
   showPoster: true,
 };
@@ -22,6 +23,7 @@ const moerebuukProfile: Profile = {
   interval: 200,
   showChat: false,
   showStats: false,
+  showVoters: false,
   showSponsors: false,
   showPoster: false,
 };

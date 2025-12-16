@@ -12,6 +12,7 @@ interface DashboardState {
   showSlido: boolean;
   showSponsors: boolean;
   showStats: boolean;
+  showVoters: boolean;
   pollingInterval: number;
   sponsorInterval: number;
   showPoster: boolean;
@@ -28,6 +29,7 @@ const initialState = {
   showSlido: false,
   showSponsors: true,
   showStats: false,
+  showVoters: false,
   pollingInterval: 200,
   sponsorInterval: 5000,
   showPoster: true,
@@ -45,6 +47,7 @@ const dashboardSlice = createSlice({
       state.showSponsors = action.payload.showSponsors;
       state.pollingInterval = action.payload.interval;
       state.showStats = action.payload.showStats;
+      state.showVoters = action.payload.showVoters;
       state.showPoster = action.payload.showPoster;
     },
     setSong(state, action: PayloadAction<Song>) {
@@ -58,6 +61,9 @@ const dashboardSlice = createSlice({
     },
     setSongStats(state, action: PayloadAction<SongStats | undefined>) {
       state.stats = action.payload;
+    },
+    setShowVoters(state, action: PayloadAction<boolean>) {
+      state.showVoters = action.payload;
     },
     setShowSlido(state, action: PayloadAction<boolean>) {
       state.showSlido = action.payload;
@@ -92,6 +98,7 @@ export const {
   setToken,
   setRefreshToken,
   setSongStats,
+  setShowVoters,
   setShowSlido,
   setShowSponsors,
   setShowStats,

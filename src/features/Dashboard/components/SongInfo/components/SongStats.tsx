@@ -5,24 +5,26 @@ import {
   SongStatsMobileContainer,
   SongVotersContainer,
 } from "./SongStats.style";
-import { SongStats as Stats } from "../../../types";
 
 export const SongStats: React.FC = () => {
-  const stats: Stats | undefined = useSelector(
-    (state: RootState) => state.dashboard.stats
+  const { stats, showVoters } = useSelector(
+    (state: RootState) => state.dashboard
   );
 
   if (stats) {
     return (
       <SongStatsContainer>
         <SongStatsMobileContainer>
+          {!showVoters && <br />}
           Punten: {stats?.points}
           <br />
           <br />
-          <SongVotersContainer>
-            Stemmen:{" "}
-            {stats.voters.map((vote) => vote.submitter_name).join(", \n")}
-          </SongVotersContainer>
+          {showVoters && (
+            <SongVotersContainer>
+              Stemmen:{" "}
+              {stats.voters.map((vote) => vote.submitter_name).join(", \n")}
+            </SongVotersContainer>
+          )}
         </SongStatsMobileContainer>
       </SongStatsContainer>
     );

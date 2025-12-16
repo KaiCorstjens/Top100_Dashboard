@@ -7,6 +7,7 @@ export type Profile = {
   interval: number;
   showChat: boolean;
   showStats: boolean;
+  showVoters: boolean;
   showPoster: boolean;
   showSponsors: boolean;
 };
