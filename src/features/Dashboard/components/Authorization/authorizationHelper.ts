@@ -1,7 +1,6 @@
 export const getAccessCodeFromUrl = (urlSearchParams: string) => {
   const urlParams = new URLSearchParams(urlSearchParams);
   const code = urlParams.get("code");
-  console.log("access code: " + code);
   return code;
 };
 

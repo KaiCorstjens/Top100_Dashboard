@@ -59,7 +59,6 @@ export const Dashboard: React.FC = () => {
       ) {
         console.log("re-request authorization");
         setToken(undefined);
-        setRefreshToken(true);
         requestUserAuthorization();
         setConsecutiveSpotifyErrors(0);
       } else if (
