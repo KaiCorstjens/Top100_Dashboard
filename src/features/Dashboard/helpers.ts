@@ -1,4 +1,3 @@
-import { SPOTIFY_CLIENT_ID } from "../../app/constants";
 import { Song, SpotifyAlbumImage, SpotifyPlayingResponse } from "./types";
 
 export const SpotifyDataToSong = (
@@ -26,41 +25,6 @@ export const SpotifyDataToSong = (
   };
 
   return receivedSong;
-};
-
-export const getAccessCodeFromUrl = (url: string) => {
-  console.log("token url: " + url);
-  if (url === undefined) {
-    return undefined;
-  }
-  const access_code_first_split = url.split("code=");
-  if (access_code_first_split.length < 2) {
-    return undefined;
-  }
-  const access_code_param = access_code_first_split[1].split("&");
-  if (access_code_param.length < 1) {
-    return undefined;
-  }
-  return access_code_param[0];
-};
-
-export const callSpotifyAuthorize = () => {
-  const client_id = SPOTIFY_CLIENT_ID;
-  const response_type = "code";
-  let site_url = window.location.href;
-  site_url = site_url.substring(0, site_url.lastIndexOf("/"));
-
-  const scope = "user-read-currently-playing";
-  const redirect_uri = site_url + "?spotify_redirect&";
-  const state = "redirected-from-spotify";
-
-  let url = "https://accounts.spotify.com/authorize";
-  url += "?response_type=" + encodeURIComponent(response_type);
-  url += "&client_id=" + encodeURIComponent(client_id);
-  url += "&scope=" + encodeURIComponent(scope);
-  url += "&redirect_uri=" + encodeURIComponent(redirect_uri);
-  url += "&state=" + encodeURIComponent(state);
-  window.location.href = url;
 };
 
 export const isDifferentSong = (

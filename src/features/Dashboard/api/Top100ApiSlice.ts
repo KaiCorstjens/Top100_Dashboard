@@ -9,10 +9,16 @@ export const top100Api = createApi({
   endpoints: (builder) => ({
     getSongStats: builder.query<
       SongStats,
-      { artist: string; title: string; spotify_uri: string; year: number }
+      {
+        artist: string;
+        title: string;
+        spotify_uri: string;
+        year: number;
+        format: "json";
+      }
     >({
       query: (params) => ({
-        url: "/stats",
+        url: "api/stats",
         params: params,
       }),
     }),

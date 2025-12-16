@@ -1,3 +1,2 @@
 // spotify
 export const SPOTIFY_CLIENT_ID = "ba35578ed09c4c3f92a833d03ecbe575";
-export const SPOTIFY = "YmEzNTU3OGVkMDljNGMzZjkyYTgzM2QwM2VjYmU1NzU6NjZlMWI0ZDdmN2Y1NDA4Y2FiYmI4NzBiMjc1NjQ1N2Q=";

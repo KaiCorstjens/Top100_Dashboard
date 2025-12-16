@@ -10,8 +10,9 @@ import {
   setSong,
   setSongStats,
   setToken,
+  setRefreshToken,
 } from "./api/DashboardSlice";
-import { spotifyApi, spotifyAuthApi } from "./api/SpotifyApiSlice";
+import { spotifyApi } from "./api/SpotifyApiSlice";
 import { useLazyGetSongStatsQuery } from "./api/Top100ApiSlice";
 import { Controls } from "./components/Controls/Controls";
 import { Slido } from "./components/Slido/Slido";
@@ -19,31 +20,30 @@ import { SongInfo } from "./components/SongInfo/SongInfo";
 import { Sponsors } from "./components/Sponsors/Sponsors";
 // import { Lyrics } from "./components/Lyrics/Lyrics";
 import { FullScreenDashboard } from "./Dashboard.style";
-import {
-  callSpotifyAuthorize,
-  getAccessCodeFromUrl,
-  isDifferentSong,
-  SpotifyDataToSong,
-} from "./helpers";
-import { Song, SpotifyTokenResponse } from "./types";
+import { isDifferentSong, SpotifyDataToSong } from "./helpers";
+import { Song } from "./types";
+import { requestUserAuthorization } from "./components/Authorization/userAuthorizationHelper";
 
 export const Dashboard: React.FC = () => {
   const dispatch = useDispatch();
   const [consecutiveSpotifyErrors, setConsecutiveSpotifyErrors] =
     useState<number>(0);
 
-  const { profile, pollingInterval, showSlido, showSponsors, song } =
-    useSelector((state: RootState) => state.dashboard);
-
-  const access_code = getAccessCodeFromUrl(window.location.href);
-
-   const [spotify_auth] = spotifyAuthApi.useGetAccessTokenQuery();
+  const {
+    profile,
+    pollingInterval,
+    showSlido,
+    showSponsors,
+    song,
+    refreshToken,
+    token,
+  } = useSelector((state: RootState) => state.dashboard);
 
   const [getSongStats] = useLazyGetSongStatsQuery();
 
   // TODO: Spotify playing gets blocked by adblocker?
   const { data, error: spotifyApiError } = spotifyApi.useGetNowPlayingQuery(
-    undefined,
+    token,
     {
       pollingInterval: pollingInterval,
       refetchOnMountOrArgChange: true,
@@ -51,36 +51,16 @@ export const Dashboard: React.FC = () => {
   );
 
   useEffect(() => {
-    if (access_code) {
-      console.log("token: " + access_code);
-      spotify_auth({
-
-      })
-      var response = spotifyAuthApi.useGetAccessTokenQuery({code: access_code});
-      console.log(response);
-      var token = response.data;
-        console.log(token);
-        if (typeof token !== 'undefined'){
-          dispatch(setToken(token.access_token));
-        } else {
-          window.alert("error with token: " + token);
-        }
-    } else {
-      console.log("Call authorizing");
-      callSpotifyAuthorize();
-    }
-  }, [access_code, dispatch, pollingInterval]);
-
-  // Spotify Authorization
-  useEffect(() => {
     if (spotifyApiError) {
       if (
-        (access_token &&
-          data !== undefined &&
+        (data !== undefined &&
           (spotifyApiError as FetchBaseQueryError).status === 401) ||
         consecutiveSpotifyErrors > 10
       ) {
-        callSpotifyAuthorize();
+        console.log("re-request authorization");
+        setToken(undefined);
+        setRefreshToken(true);
+        requestUserAuthorization();
         setConsecutiveSpotifyErrors(0);
       } else if (
         (spotifyApiError as FetchBaseQueryError).status === "FETCH_ERROR"
@@ -88,12 +68,12 @@ export const Dashboard: React.FC = () => {
         console.warn(
           "Spotify request possibly blocked on source, please disable ad blockers"
         );
-      } else {
+      } else if (!refreshToken) {
         console.warn("spotify error", spotifyApiError);
         setConsecutiveSpotifyErrors((prevState) => prevState + 1);
       }
     }
-  }, [spotifyApiError, data, access_token]);
+  }, [spotifyApiError, data]);
 
   // Spotify currently playing
   useEffect(() => {
@@ -105,6 +85,7 @@ export const Dashboard: React.FC = () => {
           artist: newSong.artist,
           spotify_uri: newSong.spotify_uri,
           year: new Date().getFullYear(),
+          format: "json",
         })
           .unwrap()
           .then((songStats) => {

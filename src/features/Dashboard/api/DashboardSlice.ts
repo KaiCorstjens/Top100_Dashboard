@@ -7,6 +7,7 @@ interface DashboardState {
   profile: Profile | undefined;
   song: Song | undefined;
   token: string | undefined;
+  refreshToken: boolean | undefined;
   stats: SongStats | undefined;
   showSlido: boolean;
   showSponsors: boolean;
@@ -22,6 +23,7 @@ const initialState = {
   profile: undefined,
   song: undefined,
   token: undefined,
+  refreshToken: true,
   stats: undefined,
   showSlido: false,
   showSponsors: true,
@@ -48,8 +50,11 @@ const dashboardSlice = createSlice({
     setSong(state, action: PayloadAction<Song>) {
       state.song = action.payload;
     },
-    setToken(state, action: PayloadAction<string>) {
+    setToken(state, action: PayloadAction<string | undefined>) {
       state.token = action.payload;
+    },
+    setRefreshToken(state, action: PayloadAction<boolean>) {
+      state.refreshToken = action.payload;
     },
     setSongStats(state, action: PayloadAction<SongStats | undefined>) {
       state.stats = action.payload;
@@ -85,6 +90,7 @@ export const {
   setProfile,
   setSong,
   setToken,
+  setRefreshToken,
   setSongStats,
   setShowSlido,
   setShowSponsors,

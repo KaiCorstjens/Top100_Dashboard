@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
 import store from "./app/store";
-import { Dashboard } from "./features/Dashboard/Dashboard";
+import { TokenRetriever } from "./features/TokenRetriever";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
@@ -12,7 +12,7 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Dashboard />
+      <TokenRetriever />
     </Provider>
   </React.StrictMode>
 );
