@@ -15,6 +15,7 @@ import { SponsorsControl } from "./SponsorsControl";
 import { PosterIntervalControl } from "./PosterIntervalControl";
 import { PosterControl } from "./PosterControl";
 import { StatsControl } from "./StatsControl";
+import { VotersControl } from "./VotersControl";
 
 export type ControlsModalProps = {
   onCloseClick: () => void;
@@ -43,6 +44,7 @@ export const ControlsModal: React.FC<ControlsModalProps> = (props) => {
             <SponsorsControl />
             <SponsorIntervalControl />
             <StatsControl />
+            <VotersControl />
             <PosterControl />
             <PosterIntervalControl />
           </ModalOptions>

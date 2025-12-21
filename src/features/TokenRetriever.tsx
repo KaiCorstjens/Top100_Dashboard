@@ -8,16 +8,14 @@ import {
   getTokenFromRefresh,
 } from "./Dashboard/components/Authorization/accessTokenHelper";
 import { requestUserAuthorization } from "./Dashboard/components/Authorization/userAuthorizationHelper";
-import { setRefreshToken, setToken } from "./Dashboard/api/DashboardSlice";
+import { setToken } from "./Dashboard/api/DashboardSlice";
 import { Dashboard } from "./Dashboard/Dashboard";
 
 export const TokenRetriever: React.FC = () => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
-  const { refreshToken, token } = useSelector(
-    (state: RootState) => state.dashboard
-  );
+  const { token } = useSelector((state: RootState) => state.dashboard);
 
   const access_code = getAccessCodeFromUrl(window.location.href);
 
@@ -28,15 +26,17 @@ export const TokenRetriever: React.FC = () => {
           setIsLoading(true);
           const response = await getToken(access_code);
           const refresh_token = response.refresh_token;
-          const expires_in = response.expires_in;
+          const expires_in = response.expires_in * 1000 * 0.9; // convert to milliseconds, take 90% to never be too late
           const token = response.access_token;
+          console.log("response", response);
           if (token) {
             dispatch(setToken(token));
-            dispatch(setRefreshToken(refresh_token));
+            console.log("refresh token: " + refresh_token);
+            //dispatch(setRefreshToken(refresh_token));
             // Call for token refresh when token expires
             setTimeout(() => {
               console.log("Refresh token");
-              fetchRefreshToken();
+              fetchRefreshToken(refresh_token);
             }, expires_in);
           }
         } catch (error) {
@@ -46,34 +46,37 @@ export const TokenRetriever: React.FC = () => {
         } finally {
           setIsLoading(false);
         }
-      } else if (token === undefined || (refreshToken && !isLoading)) {
+      } else if (token === undefined && !isLoading) {
         console.log("Call authorizing from TokenRetriever");
         requestUserAuthorization();
       }
     };
 
-    const fetchRefreshToken = async () => {
+    const fetchRefreshToken = async (refreshToken: string) => {
       console.log("Refresh token");
       if (refreshToken) {
         const response = await getTokenFromRefresh(refreshToken);
         const refresh_token = response.refresh_token;
         const expires_in = response.expires_in;
         const token = response.access_token;
+        console.log("token: " + token);
+        console.log("response: " + response);
         if (token) {
           dispatch(setToken(token));
-          dispatch(setRefreshToken(refresh_token));
+          console.log("refresh token: " + refresh_token);
+          //dispatch(setRefreshToken(refresh_token));
           // Call for token refresh when token expires
           setTimeout(() => {
             console.log("Refresh token");
-            fetchRefreshToken();
+            fetchRefreshToken(refresh_token);
           }, expires_in);
         }
       } else {
-        console.log("No refresh token");
+        console.log("No refresh token: " + refreshToken);
       }
     };
     fetchData();
-  }, [access_code, refreshToken]);
+  }, [access_code]);
 
   return isLoading ? (
     <div>Fetching token from spotify</div>

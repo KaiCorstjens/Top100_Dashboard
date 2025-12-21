@@ -1,4 +1,3 @@
-
 import { useDispatch, useSelector } from "react-redux";
 import { setShowVoters } from "../../api/DashboardSlice";
 import { StatsControlButton } from "./ControlsModal.style";

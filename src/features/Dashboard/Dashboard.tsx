@@ -10,7 +10,6 @@ import {
   setSong,
   setSongStats,
   setToken,
-  setRefreshToken,
 } from "./api/DashboardSlice";
 import { spotifyApi } from "./api/SpotifyApiSlice";
 import { useLazyGetSongStatsQuery } from "./api/Top100ApiSlice";
@@ -29,15 +28,8 @@ export const Dashboard: React.FC = () => {
   const [consecutiveSpotifyErrors, setConsecutiveSpotifyErrors] =
     useState<number>(0);
 
-  const {
-    profile,
-    pollingInterval,
-    showSlido,
-    showSponsors,
-    song,
-    refreshToken,
-    token,
-  } = useSelector((state: RootState) => state.dashboard);
+  const { profile, pollingInterval, showSlido, showSponsors, song, token } =
+    useSelector((state: RootState) => state.dashboard);
 
   const [getSongStats] = useLazyGetSongStatsQuery();
 
@@ -67,7 +59,7 @@ export const Dashboard: React.FC = () => {
         console.warn(
           "Spotify request possibly blocked on source, please disable ad blockers"
         );
-      } else if (!refreshToken) {
+      } else {
         console.warn("spotify error", spotifyApiError);
         setConsecutiveSpotifyErrors((prevState) => prevState + 1);
       }
