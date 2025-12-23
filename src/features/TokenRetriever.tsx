@@ -10,6 +10,7 @@ import {
 import { requestUserAuthorization } from "./Dashboard/components/Authorization/userAuthorizationHelper";
 import { setToken } from "./Dashboard/api/DashboardSlice";
 import { Dashboard } from "./Dashboard/Dashboard";
+import { logger } from "./utils/logger";
 
 export const TokenRetriever: React.FC = () => {
   const dispatch = useDispatch();
@@ -28,51 +29,55 @@ export const TokenRetriever: React.FC = () => {
           const refresh_token = response.refresh_token;
           const expires_in = response.expires_in * 1000 * 0.9; // convert to milliseconds, take 90% to never be too late
           const token = response.access_token;
-          console.log("response", response);
+          logger("response", response);
           if (token) {
             dispatch(setToken(token));
-            console.log("refresh token: " + refresh_token);
+            logger("refresh token: " + refresh_token);
             //dispatch(setRefreshToken(refresh_token));
             // Call for token refresh when token expires
             setTimeout(() => {
-              console.log("Refresh token");
+              logger("Refresh token");
               fetchRefreshToken(refresh_token);
             }, expires_in);
           }
         } catch (error) {
-          console.log("error");
-          console.log(error);
+          logger("error");
+          logger(error);
           setHasError(true);
         } finally {
           setIsLoading(false);
         }
       } else if (token === undefined && !isLoading) {
-        console.log("Call authorizing from TokenRetriever");
+        logger("Call authorizing from TokenRetriever");
         requestUserAuthorization();
+      } else {
+        logger("no accesss code, loading");
       }
     };
 
     const fetchRefreshToken = async (refreshToken: string) => {
-      console.log("Refresh token");
+      logger("Refresh token");
       if (refreshToken) {
         const response = await getTokenFromRefresh(refreshToken);
         const refresh_token = response.refresh_token;
         const expires_in = response.expires_in;
         const token = response.access_token;
-        console.log("token: " + token);
-        console.log("response: " + response);
+        logger("token: " + token);
+        logger("response: " + response);
         if (token) {
           dispatch(setToken(token));
-          console.log("refresh token: " + refresh_token);
-          //dispatch(setRefreshToken(refresh_token));
+          logger("refresh token: " + refresh_token);
           // Call for token refresh when token expires
           setTimeout(() => {
-            console.log("Refresh token");
+            logger("Refresh token from timeout");
             fetchRefreshToken(refresh_token);
           }, expires_in);
+        } else {
+          logger("invalid response, no token: ");
+          logger(response);
         }
       } else {
-        console.log("No refresh token: " + refreshToken);
+        logger("No refresh token: " + refreshToken);
       }
     };
     fetchData();

@@ -1,4 +1,4 @@
-import { ChangeEvent, useState, useEffect, createRef } from "react";
+import { useState, useEffect, createRef } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../app/store";
 import { PosterContainer, PosterImage } from "./Poster.style";
@@ -39,7 +39,7 @@ export const Poster = () => {
         setImageIndex((index) => {
           return index + 1 < loadedImages.length ? index + 1 : 0;
         });
-        console.log(imageIndex);
+        logger(imageIndex);
         setShouldShowPosterGivenTime(false);
       }, posterShowTime);
       return () => clearInterval(interval);

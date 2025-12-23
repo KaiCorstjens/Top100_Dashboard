@@ -22,6 +22,7 @@ import { FullScreenDashboard } from "./Dashboard.style";
 import { isDifferentSong, SpotifyDataToSong } from "./helpers";
 import { Song } from "./types";
 import { requestUserAuthorization } from "./components/Authorization/userAuthorizationHelper";
+import { logger } from "../utils/logger";
 
 export const Dashboard: React.FC = () => {
   const dispatch = useDispatch();
@@ -44,12 +45,13 @@ export const Dashboard: React.FC = () => {
 
   useEffect(() => {
     if (spotifyApiError) {
+      logger(spotifyApiError);
       if (
         (data !== undefined &&
           (spotifyApiError as FetchBaseQueryError).status === 401) ||
         consecutiveSpotifyErrors > 10
       ) {
-        console.log("re-request authorization");
+        logger("re-request authorization");
         setToken(undefined);
         requestUserAuthorization();
         setConsecutiveSpotifyErrors(0);
@@ -64,7 +66,7 @@ export const Dashboard: React.FC = () => {
         setConsecutiveSpotifyErrors((prevState) => prevState + 1);
       }
     }
-  }, [spotifyApiError, data]);
+  }, [spotifyApiError, data, consecutiveSpotifyErrors]);
 
   // Spotify currently playing
   useEffect(() => {
@@ -91,13 +93,13 @@ export const Dashboard: React.FC = () => {
       }
       dispatch(setSong(newSong));
     }
-  }, [data, getSongStats]); // DON'T add song as a dependency!
+  }, [data, getSongStats, dispatch]); // DON'T add song as a dependency!
 
   useEffect(() => {
     if (profile === undefined) {
       dispatch(setProfile(getDefaultProfile()));
     }
-  }, [profile]);
+  }, [profile, dispatch]);
 
   return (
     <ThemeProvider theme={profile?.theme ?? defaultTheme}>

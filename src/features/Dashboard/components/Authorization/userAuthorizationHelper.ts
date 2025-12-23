@@ -1,4 +1,5 @@
 import { SPOTIFY_CLIENT_ID } from "../../../../app/constants";
+import { logger } from "../../../utils/logger";
 import { getRedirectUri } from "./authorizationHelper";
 
 const generateRandomString = (length: number) => {
@@ -24,7 +25,7 @@ const base64encode = (input: ArrayBuffer) => {
 const getCodeChallenge = async (codeVerifier: string) => {
   const hashed = await sha256(codeVerifier);
   const codeChallenge = base64encode(hashed);
-  console.log("Code Challenge: " + codeChallenge);
+  logger("Code Challenge: " + codeChallenge);
   return codeChallenge;
 };
 
@@ -36,7 +37,7 @@ export const requestUserAuthorization = async () => {
   const authUrl = new URL("https://accounts.spotify.com/authorize");
 
   const codeVerifier = generateRandomString(64);
-  console.log("code verifier: " + codeVerifier);
+  logger("code verifier: " + codeVerifier);
   const codeChallenge = await getCodeChallenge(codeVerifier);
   const state = "redirected-from-spotify";
 

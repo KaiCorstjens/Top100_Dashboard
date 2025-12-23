@@ -1,4 +1,3 @@
-import { profile } from "console";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getProfileByName,

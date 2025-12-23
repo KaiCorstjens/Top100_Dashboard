@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../../../app/store";
-import { SpotifyPlayingResponse, SpotifyTokenResponse } from "../types";
+import { SpotifyPlayingResponse } from "../types";
 
 export const spotifyApi = createApi({
   reducerPath: "spotifyApi",

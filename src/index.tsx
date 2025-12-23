@@ -6,16 +6,20 @@ import "./index.css";
 import store from "./app/store";
 import { TokenRetriever } from "./features/TokenRetriever";
 
-const container = document.getElementById("root")!;
-const root = createRoot(container);
+const container = document.getElementById("root");
+if (container) {
+  const root = createRoot(container);
 
-root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <TokenRetriever />
-    </Provider>
-  </React.StrictMode>
-);
+  root.render(
+    <React.StrictMode>
+      <Provider store={store}>
+        <TokenRetriever />
+      </Provider>
+    </React.StrictMode>
+  );
+} else {
+  alert("No element with id root, react error");
+}
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

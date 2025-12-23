@@ -54,5 +54,5 @@ export const getTokenFromRefresh = async (refreshToken: string) => {
   if (response.refresh_token) {
     localStorage.setItem("refresh_token", response.refresh_token);
   }
-  return response.access_token;
+  return response;
 };
