@@ -8,7 +8,7 @@ const popellProfile: Profile = {
   id: 1,
   name: "Popell",
   theme: top100Theme,
-  interval: 200,
+  interval: 500,
   showChat: false,
   showStats: true,
   showVoters: false,

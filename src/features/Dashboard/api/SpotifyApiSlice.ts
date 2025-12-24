@@ -25,28 +25,4 @@ export const spotifyApi = createApi({
   }),
 });
 
-// export const spotifyAuthApi = createApi({
-//   reducerPath: "spotifyApi",
-//   baseQuery: fetchBaseQuery({
-//     baseUrl: "https://accounts.spotify.com/api/",
-//     prepareHeaders: (headers, { getState }) => {
-//       headers.set("Authorization", "Basic " + SPOTIFY);
-//       headers.set("content-type", "application/x-www-form-urlencoded");
-//       return headers;
-//     },
-//   }),
-//   endpoints: (builder) => ({
-//     getAccessToken: builder.query<
-//       SpotifyTokenResponse,
-//       { code: string; grant_type: string; redirect_uri: string }
-//     >({
-//       query: (params) => ({
-//         url: "/token",
-//         params: params,
-//       }),
-//     }),
-//   }),
-// });
-
 export const { useGetNowPlayingQuery } = spotifyApi;
-// export const { useLazyGetAccessTokenQuery } = spotifyAuthApi;

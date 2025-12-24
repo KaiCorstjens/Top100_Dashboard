@@ -1,9 +1,11 @@
 import { SPOTIFY_CLIENT_ID } from "../../../../app/constants";
+import { logger } from "../../../utils/logger";
 
 import { getRedirectUri } from "./authorizationHelper";
 
 export const getToken = async (code: string) => {
   // stored in the previous step
+  logger("get token from access code");
   const codeVerifier = localStorage.getItem("code_verifier") ?? "NOT_FOUND";
   const redirectUri = getRedirectUri();
   const clientId = SPOTIFY_CLIENT_ID;
@@ -28,12 +30,12 @@ export const getToken = async (code: string) => {
   const body = await fetch(url, payload);
   const response = await body.json();
 
-  localStorage.setItem("refresh_token", response.refresh_token);
   return response;
 };
 
 export const getTokenFromRefresh = async (refreshToken: string) => {
   // refresh token that has been previously stored
+  logger("get token from refreshtoken");
   const url = "https://accounts.spotify.com/api/token";
   const clientId = SPOTIFY_CLIENT_ID;
 

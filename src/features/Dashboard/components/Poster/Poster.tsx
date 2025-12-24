@@ -5,6 +5,7 @@ import { PosterContainer, PosterImage } from "./Poster.style";
 import { useContext } from "react";
 import { ThemeContext } from "styled-components";
 import { importAll } from "../../../utils/ImageLoader";
+import { logger } from "../../../utils/logger";
 
 export const Poster = () => {
   // const [imageUrls, setImageUrls] = useLocalStorage<string[]>(

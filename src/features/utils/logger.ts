@@ -1,6 +1,10 @@
-const loggingEnabled: boolean = false;
+const loggingEnabled = true;
 export const logger = (message?: any, ...optionalParams: any[]): void => {
-    if(loggingEnabled) {
-        console.log(message,optionalParams);
+  if (loggingEnabled) {
+    if (optionalParams) {
+      console.log(message, optionalParams);
+    } else {
+      console.log(message);
     }
-}
+  }
+};

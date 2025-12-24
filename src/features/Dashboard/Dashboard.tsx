@@ -10,6 +10,7 @@ import {
   setSong,
   setSongStats,
   setToken,
+  setPollingInterval,
 } from "./api/DashboardSlice";
 import { spotifyApi } from "./api/SpotifyApiSlice";
 import { useLazyGetSongStatsQuery } from "./api/Top100ApiSlice";
@@ -28,6 +29,8 @@ export const Dashboard: React.FC = () => {
   const dispatch = useDispatch();
   const [consecutiveSpotifyErrors, setConsecutiveSpotifyErrors] =
     useState<number>(0);
+
+  const [pauseRequests, setPauseRequests] = useState<boolean>(false);
 
   const { profile, pollingInterval, showSlido, showSponsors, song, token } =
     useSelector((state: RootState) => state.dashboard);
@@ -63,7 +66,19 @@ export const Dashboard: React.FC = () => {
         );
       } else {
         console.warn("spotify error", spotifyApiError);
-        setConsecutiveSpotifyErrors((prevState) => prevState + 1);
+        if ((spotifyApiError as any).originalStatus === 429 && !pauseRequests) {
+          const pauseTime = 5000; // 5 seconds
+          logger("Too many requests, pause for " + pauseTime + " ms");
+          const oldPollingInterval = pollingInterval;
+          setPollingInterval(pauseTime); // Set to 5 seconds, pause for 5 seconds
+          setTimeout(() => {
+            logger("set to old interval: " + oldPollingInterval);
+            setPollingInterval(oldPollingInterval);
+          }, pauseTime);
+          setConsecutiveSpotifyErrors(0);
+        } else {
+          setConsecutiveSpotifyErrors((prevState) => prevState + 1);
+        }
       }
     }
   }, [spotifyApiError, data, consecutiveSpotifyErrors]);

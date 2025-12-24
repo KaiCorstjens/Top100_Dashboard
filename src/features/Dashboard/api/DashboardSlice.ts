@@ -28,7 +28,7 @@ const initialState = {
   showSponsors: true,
   showStats: false,
   showVoters: false,
-  pollingInterval: 200,
+  pollingInterval: 500,
   sponsorInterval: 5000,
   showPoster: true,
   posterInterval: 900000, // 15 minutes
