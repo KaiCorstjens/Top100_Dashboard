@@ -1,26 +1,37 @@
 {
   "files": {
     "main.css": "/Top100_Dashboard/static/css/main.e6c13ad2.css",
-    "main.js": "/Top100_Dashboard/static/js/main.2876b9d6.js",
+    "main.js": "/Top100_Dashboard/static/js/main.fcca3ae0.js",
     "static/js/496.7cab6e90.chunk.js": "/Top100_Dashboard/static/js/496.7cab6e90.chunk.js",
     "static/media/1.png": "/Top100_Dashboard/static/media/1.1bf1b82d80a5d393d076.png",
     "static/media/Blacktree schermbeeld6.jpg": "/Top100_Dashboard/static/media/Blacktree schermbeeld6.4cdb081559865a8d9e67.jpg",
     "static/media/haarboutique.png": "/Top100_Dashboard/static/media/haarboutique.0e9131ab12d0489feca4.png",
+    "static/media/geitenkaaseieren.png": "/Top100_Dashboard/static/media/geitenkaaseieren.db4182210efb06cf3f96.png",
+    "static/media/kvw.png": "/Top100_Dashboard/static/media/kvw.6554a3c519c2d8a00fe7.png",
+    "static/media/vdLooij.png": "/Top100_Dashboard/static/media/vdLooij.55444639433ef24288fa.png",
+    "static/media/ready2rock.png": "/Top100_Dashboard/static/media/ready2rock.facd070e54f3c5dbe985.png",
+    "static/media/lus.png": "/Top100_Dashboard/static/media/lus.9344601c6ed7320ef1f2.png",
+    "static/media/baets.png": "/Top100_Dashboard/static/media/baets.75ce3a8b3475b43fff3a.png",
     "static/media/frits_fries.png": "/Top100_Dashboard/static/media/frits_fries.f784340a1b16e711cf20.png",
+    "static/media/voermans_cillekens.png": "/Top100_Dashboard/static/media/voermans_cillekens.fe5d8b4cd8283f5c2b40.png",
+    "static/media/friettent.png": "/Top100_Dashboard/static/media/friettent.ea2320cec5ef97367651.png",
+    "static/media/bachelor.jpg": "/Top100_Dashboard/static/media/bachelor.a63dbeb93272785154c0.jpg",
     "static/media/slager.jpg": "/Top100_Dashboard/static/media/slager.2dfaf2fe8280f4b775f5.jpg",
+    "static/media/kebabhuis.png": "/Top100_Dashboard/static/media/kebabhuis.9027ae491f1671f059fb.png",
     "static/media/Colormasters.png": "/Top100_Dashboard/static/media/Colormasters.ad71964eafd396e87a25.png",
     "static/media/sg-sound-light.jpg": "/Top100_Dashboard/static/media/sg-sound-light.593c9bb0f259db36d294.jpg",
-    "static/media/opjebestbijevi.png": "/Top100_Dashboard/static/media/opjebestbijevi.b23dac4940122e000e0e.png",
+    "static/media/mertens_bg.png": "/Top100_Dashboard/static/media/mertens_bg.2a17c3fc674d98382c41.png",
+    "static/media/mertens.png": "/Top100_Dashboard/static/media/mertens.0e3afe013c35ed553d4f.png",
     "static/media/Linders-Kwekerijen-Logo-1.jpg": "/Top100_Dashboard/static/media/Linders-Kwekerijen-Logo-1.dcf7d310484adeea1dcb.jpg",
     "static/media/wim steuten.png": "/Top100_Dashboard/static/media/wim steuten.e1b2f932527531a907b0.png",
     "static/media/krebotec.jpeg": "/Top100_Dashboard/static/media/krebotec.285412dd1e755446b5a4.jpeg",
     "index.html": "/Top100_Dashboard/index.html",
     "main.e6c13ad2.css.map": "/Top100_Dashboard/static/css/main.e6c13ad2.css.map",
-    "main.2876b9d6.js.map": "/Top100_Dashboard/static/js/main.2876b9d6.js.map",
+    "main.fcca3ae0.js.map": "/Top100_Dashboard/static/js/main.fcca3ae0.js.map",
     "496.7cab6e90.chunk.js.map": "/Top100_Dashboard/static/js/496.7cab6e90.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.2876b9d6.js"
+    "static/js/main.fcca3ae0.js"
   ]
 }
